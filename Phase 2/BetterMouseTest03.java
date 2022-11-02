@@ -20,7 +20,7 @@ import javax.lang.model.util.ElementScanner14;
 import javax.swing.*;
 
 
-public class BetterMouseTest
+public class BetterMouseTest03
 {
 
     public static void main(String [] commandLineArguments)

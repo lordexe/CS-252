@@ -15,24 +15,36 @@ import javax.lang.model.util.ElementScanner14;
 import javax.swing.*;
 
 public class Vm252DebuggerGui{
-    public static main(String [] commandLineArguments){
+    public static void main(String [] commandLineArguments)
+    {
+
         EventQueue.invokeLater(
             () ->{
-                ProgramFrame frame = new ProgramFrame();
+                    ProgramFrame frame = new ProgramFrame();
+                    frame.setTitle("Better Mouse Test");
+                    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                    frame.setVisible(true);
 
-                frame.setTitle("Better Mouse Test");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.setVisible(true);
-            }
-        );
+                    }
+            );
+
+        }
+
     }
-}
+
+class ProgramFrame extends JFrame{
+    public ProgramFrame(){
+        add(new MouseComponent());
+        pack();
+        }
+
+    }
 
 /**
  * InnerVm252DebuggerGui
  * working for create button and processings
  */
-public class InnerVm252DebuggerGui {
+// public class InnerVm252DebuggerGui {
 
     
-}
+// }
