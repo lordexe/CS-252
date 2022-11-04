@@ -38,5 +38,18 @@ class ProgramFrame extends JFrame{
     public ProgramFrame(){
         setTitle("VM252 Debuger GUI");
         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
+
+        ObservableVM252Debugger machine = new ObservableVM252Debugger();
+
+        FunctionButtonsPanel buttonsPanel = new FunctionButtonsPanel(machine);
+
+        setPanel(new JPanel());
+        getPanel().setLayout(null);
+
+        buttonsPanel.setBounds(0, 0, 800, 100);
+        getPanel().add(buttonsPanel);
+
+        add(getPanel());
+
     }
 }

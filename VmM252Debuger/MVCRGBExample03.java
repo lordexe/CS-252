@@ -1,767 +1,767 @@
-import java.awt.*;
-import java.awt.event.*;
-import java.util.Scanner;
-import javax.swing.*;
+// import java.awt.*;
+// import java.awt.event.*;
+// import java.util.Scanner;
+// import javax.swing.*;
 
 
-public class MVCRGBExample03
-{
+// public class MVCRGBExample03
+// {
 
-    public static void main(String [] commandLineArguments)
-    {
+//     public static void main(String [] commandLineArguments)
+//     {
 
-        EventQueue.invokeLater(
-            () ->
-                {
+//         EventQueue.invokeLater(
+//             () ->
+//                 {
 
 
-                    //
-                    // Create program frame
-                    //
+//                     //
+//                     // Create program frame
+//                     //
 
-                        ProgramFrame frame = new ProgramFrame();
+//                         ProgramFrame frame = new ProgramFrame();
 
-                    //
-                    // Set frame's visibility and closing behavior
-                    //
+//                     //
+//                     // Set frame's visibility and closing behavior
+//                     //
 
-                        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                        frame.setVisible(true);
+//                         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//                         frame.setVisible(true);
 
-                    }
+//                     }
 
-            );
+//             );
 
-        }
+//         }
 
-    }
+//     }
 
 
-class ProgramFrame extends JFrame
-{
+// class ProgramFrame extends JFrame
+// {
 
-    private static final int OUR_DEFAULT_WIDTH = 600;
-    private static final int OUR_DEFAULT_HEIGHT = 600;
+//     private static final int OUR_DEFAULT_WIDTH = 600;
+//     private static final int OUR_DEFAULT_HEIGHT = 600;
 
-    private JPanel myPanel;
+//     private JPanel myPanel;
 
-    //
-    // Accessors
-    //
+//     //
+//     // Accessors
+//     //
 
-    private JPanel getPanel()
-    {
+//     private JPanel getPanel()
+//     {
 
-        return myPanel;
+//         return myPanel;
 
-        }
+//         }
 
-    //
-    // Mutators
-    //
+//     //
+//     // Mutators
+//     //
 
-    private void setPanel(JPanel other)
-    {
+//     private void setPanel(JPanel other)
+//     {
 
-        myPanel = other;
+//         myPanel = other;
 
-        }
+//         }
 
-    //
-    // Ctors
-    //
+//     //
+//     // Ctors
+//     //
 
-    public ProgramFrame()
-    {
+//     public ProgramFrame()
+//     {
 
-        setTitle("Swatch - RGB Values - Buttons");
-        setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
+//         setTitle("Swatch - RGB Values - Buttons");
+//         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
 
-        //
-        // Create model object
-        //
+//         //
+//         // Create model object
+//         //
 
-            ObservableRGBValue color = new ObservableRGBValue(0, 0, 0);
+//             ObservableRGBValue color = new ObservableRGBValue(0, 0, 0);
 
-        //
-        // Create view panel
-        //
+//         //
+//         // Create view panel
+//         //
 
-            SwatchView swatch = new SwatchView(color);
+//             SwatchView swatch = new SwatchView(color);
 
-        //
-        // Create hybrid view-controller panel
-        //
+//         //
+//         // Create hybrid view-controller panel
+//         //
 
-            RGBValuesViewAndController rgbValues = new RGBValuesViewAndController(color);
+//             RGBValuesViewAndController rgbValues = new RGBValuesViewAndController(color);
 
-        //
-        // Create controller panel
-        //
+//         //
+//         // Create controller panel
+//         //
 
-            ButtonsController buttons = new ButtonsController(color);
+//             ButtonsController buttons = new ButtonsController(color);
 
-        //
-        // Create panel to hold all views and controllers
-        //
+//         //
+//         // Create panel to hold all views and controllers
+//         //
 
-            setPanel(new JPanel());
-            getPanel().setLayout(new GridLayout(2, 2));
+//             setPanel(new JPanel());
+//             getPanel().setLayout(new GridLayout(2, 2));
 
-        //
-        // Add views and controllers to panel
-        //
+//         //
+//         // Add views and controllers to panel
+//         //
 
-            getPanel().add(swatch);
-            getPanel().add(rgbValues);
-            getPanel().add(buttons);
+//             getPanel().add(swatch);
+//             getPanel().add(rgbValues);
+//             getPanel().add(buttons);
 
-        //
-        // Add panel to program frame
-        //
+//         //
+//         // Add panel to program frame
+//         //
 
-            add(getPanel());
+//             add(getPanel());
 
-        }
+//         }
 
-    }
+//     }
 
 
-class SwatchView extends JPanel implements SimpleObserver
-{
+// class SwatchView extends JPanel implements SimpleObserver
+// {
 
-    private static final int OUR_DEFAULT_WIDTH = 300;
-    private static final int OUR_DEFAULT_HEIGHT = 300;
+//     private static final int OUR_DEFAULT_WIDTH = 300;
+//     private static final int OUR_DEFAULT_HEIGHT = 300;
 
-    private JPanel myPanel;
-    private ObservableRGBValue mySubject;
+//     private JPanel myPanel;
+//     private ObservableRGBValue mySubject;
 
-    //
-    // Accessors
-    //
+//     //
+//     // Accessors
+//     //
 
-    private JPanel getPanel()
-    {
+//     private JPanel getPanel()
+//     {
 
-        return myPanel;
+//         return myPanel;
 
-        }
+//         }
 
-    private ObservableRGBValue getSubject()
-    {
+//     private ObservableRGBValue getSubject()
+//     {
 
-        return mySubject;
+//         return mySubject;
 
-        }
+//         }
 
-    //
-    // Mutators
-    //
+//     //
+//     // Mutators
+//     //
 
-    private void setPanel(JPanel other)
-    {
+//     private void setPanel(JPanel other)
+//     {
 
-        myPanel = other;
+//         myPanel = other;
 
-        }
+//         }
 
-    public void setSubject(ObservableRGBValue other)
-    {
+//     public void setSubject(ObservableRGBValue other)
+//     {
 
-        if (getSubject() != null)
-            getSubject().detach(this);
+//         if (getSubject() != null)
+//             getSubject().detach(this);
 
-        mySubject = other;
+//         mySubject = other;
 
-        if (getSubject() != null)
-            getSubject().attach(this);
+//         if (getSubject() != null)
+//             getSubject().attach(this);
 
-        }
+//         }
 
-    //
-    // Ctors
-    //
+//     //
+//     // Ctors
+//     //
 
-    public SwatchView()
-    {
+//     public SwatchView()
+//     {
 
-        this(null);
+//         this(null);
 
-        }
+//         }
 
-    public SwatchView(ObservableRGBValue initialRgb)
-    {
+//     public SwatchView(ObservableRGBValue initialRgb)
+//     {
 
-        setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
+//         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
 
-        setSubject(initialRgb);
+//         setSubject(initialRgb);
 
-        //
-        // Create a panel with which to display a swatch of the model's color
-        //
+//         //
+//         // Create a panel with which to display a swatch of the model's color
+//         //
 
-            setPanel(new JPanel());
+//             setPanel(new JPanel());
 
-        //
-        // Add the panel to the container
-        //
+//         //
+//         // Add the panel to the container
+//         //
 
-            add(getPanel());
+//             add(getPanel());
 
-        //
-        // Initially display the model's color or (if there is no model) black
-        //
+//         //
+//         // Initially display the model's color or (if there is no model) black
+//         //
 
-            if (getSubject() != null)
+//             if (getSubject() != null)
 
-                getPanel().setBackground(
-                    new Color(
-                        getSubject().getRedValue(),
-                        getSubject().getGreenValue(),
-                        getSubject().getBlueValue()
-                        )
-                    );
+//                 getPanel().setBackground(
+//                     new Color(
+//                         getSubject().getRedValue(),
+//                         getSubject().getGreenValue(),
+//                         getSubject().getBlueValue()
+//                         )
+//                     );
 
-            else
+//             else
 
-                getPanel().setBackground(new Color(0, 0, 0));
+//                 getPanel().setBackground(new Color(0, 0, 0));
 
-        //
-        // Change the layout of the container of swatch panel so that swatch is maximally
-        // sized (this layout change is unnecessary when the container of the swatch panel
-        // is a JFrame but necessary when the container is a JPanel)
-        //
+//         //
+//         // Change the layout of the container of swatch panel so that swatch is maximally
+//         // sized (this layout change is unnecessary when the container of the swatch panel
+//         // is a JFrame but necessary when the container is a JPanel)
+//         //
 
-            setLayout(new GridLayout(1, 1));
+//             setLayout(new GridLayout(1, 1));
 
-        }
+//         }
 
-    //
-    // Observation methods
-    //
+//     //
+//     // Observation methods
+//     //
 
-    @Override
-    public void update()
-    {
+//     @Override
+//     public void update()
+//     {
 
-        //
-        // Display the updated color specified by the model
-        //
+//         //
+//         // Display the updated color specified by the model
+//         //
 
-            getPanel().setBackground(
-                new Color(
-                    getSubject().getRedValue(),
-                    getSubject().getGreenValue(),
-                    getSubject().getBlueValue()
-                    )
-                );
+//             getPanel().setBackground(
+//                 new Color(
+//                     getSubject().getRedValue(),
+//                     getSubject().getGreenValue(),
+//                     getSubject().getBlueValue()
+//                     )
+//                 );
 
-        }
+//         }
 
-    }
+//     }
 
 
-class ButtonsController extends JPanel
-{
+// class ButtonsController extends JPanel
+// {
 
-    private static final int OUR_DEFAULT_WIDTH = 300;
-    private static final int OUR_DEFAULT_HEIGHT = 300;
+//     private static final int OUR_DEFAULT_WIDTH = 300;
+//     private static final int OUR_DEFAULT_HEIGHT = 300;
 
-    private JPanel myPanel;
-    private ObservableRGBValue myModel;
+//     private JPanel myPanel;
+//     private ObservableRGBValue myModel;
 
-    //
-    // Accessors
-    //
+//     //
+//     // Accessors
+//     //
 
-    private JPanel getPanel()
-    {
+//     private JPanel getPanel()
+//     {
 
-        return myPanel;
+//         return myPanel;
 
-        }
+//         }
 
-    private ObservableRGBValue getModel()
-    {
+//     private ObservableRGBValue getModel()
+//     {
 
-        return myModel;
+//         return myModel;
 
-        }
+//         }
 
-    //
-    // Mutators
-    //
+//     //
+//     // Mutators
+//     //
 
-    private void setPanel(JPanel other)
-    {
+//     private void setPanel(JPanel other)
+//     {
 
-        myPanel = other;
+//         myPanel = other;
 
-        }
+//         }
 
-    public void setModel(ObservableRGBValue other)
-    {
+//     public void setModel(ObservableRGBValue other)
+//     {
 
-        myModel = other;
+//         myModel = other;
 
-        }
+//         }
 
-    //
-    // Ctors
-    //
+//     //
+//     // Ctors
+//     //
 
-    public ButtonsController()
-    {
+//     public ButtonsController()
+//     {
 
-        this(null);
+//         this(null);
 
-        }
+//         }
 
-    public ButtonsController(ObservableRGBValue initialModel)
-    {
+//     public ButtonsController(ObservableVM252Debugger machine)
+//     {
 
-        setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
+//         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
 
-        setModel(initialModel);
+//         setModel(machine);
 
-        //
-        // Create buttons to alter the model's color
-        //
+//         //
+//         // Create buttons to alter the model's color
+//         //
 
-            JButton redButton = new JButton("Red");
-            JButton orangeButton = new JButton("Orange");
-            JButton yellowButton = new JButton("Yellow");
-            JButton greenButton = new JButton("Green");
-            JButton blueButton = new JButton("Blue");
-            JButton indigoButton = new JButton("Indigo");
-            JButton violetButton = new JButton("Violet");
+//             JButton redButton = new JButton("Red");
+//             JButton orangeButton = new JButton("Orange");
+//             JButton yellowButton = new JButton("Yellow");
+//             JButton greenButton = new JButton("Green");
+//             JButton blueButton = new JButton("Blue");
+//             JButton indigoButton = new JButton("Indigo");
+//             JButton violetButton = new JButton("Violet");
 
-        //
-        // Create a panel to hold all the buttons
-        //
+//         //
+//         // Create a panel to hold all the buttons
+//         //
 
-            setPanel(new JPanel());
-            getPanel().setLayout(new GridLayout(3, 3));
+//             setPanel(new JPanel());
+//             getPanel().setLayout(new GridLayout(3, 3));
 
-        //
-        // Add the buttons to the panel
-        //
+//         //
+//         // Add the buttons to the panel
+//         //
 
-            getPanel().add(redButton);
-            getPanel().add(orangeButton);
-            getPanel().add(yellowButton);
-            getPanel().add(greenButton);
-            getPanel().add(blueButton);
-            getPanel().add(indigoButton);
-            getPanel().add(violetButton);
+//             getPanel().add(redButton);
+//             getPanel().add(orangeButton);
+//             getPanel().add(yellowButton);
+//             getPanel().add(greenButton);
+//             getPanel().add(blueButton);
+//             getPanel().add(indigoButton);
+//             getPanel().add(violetButton);
 
-        //
-        // Add the panel to the container
-        //
+//         //
+//         // Add the panel to the container
+//         //
 
-            add(getPanel());
+//             add(getPanel());
 
-        //
-        // Create actions to alter the model's color when the buttons are pressed
-        //
+//         //
+//         // Create actions to alter the model's color when the buttons are pressed
+//         //
 
-            ButtonAction redButtonAction = new ButtonAction(255, 0, 0);
-            ButtonAction orangeButtonAction = new ButtonAction(255, 165, 0);
-            ButtonAction yellowButtonAction = new ButtonAction(255, 255, 0);
-            ButtonAction greenButtonAction = new ButtonAction(0, 255, 0);
-            ButtonAction blueButtonAction = new ButtonAction(0, 0, 255);
-            ButtonAction indigoButtonAction = new ButtonAction(75, 0, 130);
-            ButtonAction violetButtonAction = new ButtonAction(238, 130, 238);
+//             ButtonAction redButtonAction = new ButtonAction(255, 0, 0);
+//             ButtonAction orangeButtonAction = new ButtonAction(255, 165, 0);
+//             ButtonAction yellowButtonAction = new ButtonAction(255, 255, 0);
+//             ButtonAction greenButtonAction = new ButtonAction(0, 255, 0);
+//             ButtonAction blueButtonAction = new ButtonAction(0, 0, 255);
+//             ButtonAction indigoButtonAction = new ButtonAction(75, 0, 130);
+//             ButtonAction violetButtonAction = new ButtonAction(238, 130, 238);
 
-        //
-        // Associate the actions with corresponding buttons
-        //
+//         //
+//         // Associate the actions with corresponding buttons
+//         //
 
-            redButton.addActionListener(redButtonAction);
-            orangeButton.addActionListener(orangeButtonAction);
-            yellowButton.addActionListener(yellowButtonAction);
-            greenButton.addActionListener(greenButtonAction);
-            blueButton.addActionListener(blueButtonAction);
-            indigoButton.addActionListener(indigoButtonAction);
-            violetButton.addActionListener(violetButtonAction);
+//             redButton.addActionListener(redButtonAction);
+//             orangeButton.addActionListener(orangeButtonAction);
+//             yellowButton.addActionListener(yellowButtonAction);
+//             greenButton.addActionListener(greenButtonAction);
+//             blueButton.addActionListener(blueButtonAction);
+//             indigoButton.addActionListener(indigoButtonAction);
+//             violetButton.addActionListener(violetButtonAction);
 
-        }
+//         }
 
 
-    private class ButtonAction implements ActionListener
-    {
+//     private class ButtonAction implements ActionListener
+//     {
 
-        private int myRedValue;
-        private int myGreenValue;
-        private int myBlueValue;
+//         private int myRedValue;
+//         private int myGreenValue;
+//         private int myBlueValue;
 
-        //
-        // Accessors
-        //
+//         //
+//         // Accessors
+//         //
 
-        private int getRedValue()
-        {
+//         private int getRedValue()
+//         {
 
-            return myRedValue;
+//             return myRedValue;
 
-            }
+//             }
 
-        private int getGreenValue()
-        {
+//         private int getGreenValue()
+//         {
 
-            return myGreenValue;
+//             return myGreenValue;
 
-            }
+//             }
 
-        private int getBlueValue()
-        {
+//         private int getBlueValue()
+//         {
 
-            return myBlueValue;
+//             return myBlueValue;
 
-            }
+//             }
 
-        //
-        // Mutators
-        //
+//         //
+//         // Mutators
+//         //
 
-        private void setRedValue(int other)
-        {
+//         private void setRedValue(int other)
+//         {
 
-            myRedValue = other;
+//             myRedValue = other;
 
-            }
+//             }
 
-        private void setGreenValue(int other)
-        {
+//         private void setGreenValue(int other)
+//         {
 
-            myGreenValue = other;
+//             myGreenValue = other;
 
-            }
+//             }
 
-        private void setBlueValue(int other)
-        {
+//         private void setBlueValue(int other)
+//         {
 
-            myBlueValue = other;
+//             myBlueValue = other;
 
-            }
+//             }
 
-        //
-        // Ctors
-        //
+//         //
+//         // Ctors
+//         //
 
-        public ButtonAction(
-            int initialRedValue,
-            int initialGreenValue,
-            int initialBlueValue
-            )
-        {
+//         public ButtonAction(
+//             int initialRedValue,
+//             int initialGreenValue,
+//             int initialBlueValue
+//             )
+//         {
 
-            setRedValue(initialRedValue);
-            setGreenValue(initialGreenValue);
-            setBlueValue(initialBlueValue);
+//             setRedValue(initialRedValue);
+//             setGreenValue(initialGreenValue);
+//             setBlueValue(initialBlueValue);
 
-            }
+//             }
 
-        //
-        // Event handlers
-        //
+//         //
+//         // Event handlers
+//         //
 
-        @Override
-        public void actionPerformed(ActionEvent event)
-        {
+//         @Override
+//         public void actionPerformed(ActionEvent event)
+//         {
 
-            if (getModel() != null) {
+//             if (getModel() != null) {
 
-                //
-                // Alter the color levels of the model to the levels specified for this
-                // action
-                //
+//                 //
+//                 // Alter the color levels of the model to the levels specified for this
+//                 // action
+//                 //
 
-                    getModel().setRedValue(getRedValue());
-                    getModel().setGreenValue(getGreenValue());
-                    getModel().setBlueValue(getBlueValue());
+//                     getModel().setRedValue(getRedValue());
+//                     getModel().setGreenValue(getGreenValue());
+//                     getModel().setBlueValue(getBlueValue());
 
-                }
+//                 }
 
-            }
+//             }
 
-        }
+//         }
 
 
-    }
+//     }
 
 
-class RGBValuesViewAndController extends JPanel implements SimpleObserver
-{
+// class RGBValuesViewAndController extends JPanel implements SimpleObserver
+// {
 
-    private static final int OUR_DEFAULT_FRAME_WIDTH = 300;
-    private static final int OUR_DEFAULT_FRAME_HEIGHT = 300;
-    private static final int OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH = 5;
+//     private static final int OUR_DEFAULT_FRAME_WIDTH = 300;
+//     private static final int OUR_DEFAULT_FRAME_HEIGHT = 300;
+//     private static final int OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH = 5;
 
-    private JPanel myPanel;
-    private ObservableRGBValue mySubjectModel;
-    private JTextField myRedValueTextField;
-    private JTextField myGreenValueTextField;
-    private JTextField myBlueValueTextField;
+//     private JPanel myPanel;
+//     private ObservableRGBValue mySubjectModel;
+//     private JTextField myRedValueTextField;
+//     private JTextField myGreenValueTextField;
+//     private JTextField myBlueValueTextField;
 
-    //
-    // Accessors
-    //
+//     //
+//     // Accessors
+//     //
 
-    private JPanel getPanel()
-    {
+//     private JPanel getPanel()
+//     {
 
-        return myPanel;
+//         return myPanel;
 
-        }
+//         }
 
-    private ObservableRGBValue getSubjectModel()
-    {
+//     private ObservableRGBValue getSubjectModel()
+//     {
 
-        return mySubjectModel;
+//         return mySubjectModel;
 
-        }
+//         }
 
-    private JTextField getRedValueTextField()
-    {
+//     private JTextField getRedValueTextField()
+//     {
 
-        return myRedValueTextField;
+//         return myRedValueTextField;
 
-        }
+//         }
 
-    private JTextField getGreenValueTextField()
-    {
+//     private JTextField getGreenValueTextField()
+//     {
 
-        return myGreenValueTextField;
+//         return myGreenValueTextField;
 
-        }
+//         }
 
-    private JTextField getBlueValueTextField()
-    {
+//     private JTextField getBlueValueTextField()
+//     {
 
-        return myBlueValueTextField;
+//         return myBlueValueTextField;
 
-        }
+//         }
 
-    //
-    // Mutators
-    //
+//     //
+//     // Mutators
+//     //
 
-    private void setPanel(JPanel other)
-    {
+//     private void setPanel(JPanel other)
+//     {
 
-        myPanel = other;
+//         myPanel = other;
 
-        }
+//         }
 
-    private void setSubjectModel(ObservableRGBValue other)
-    {
+//     private void setSubjectModel(ObservableRGBValue other)
+//     {
 
-        if (getSubjectModel() != null)
-            getSubjectModel().detach(this);
+//         if (getSubjectModel() != null)
+//             getSubjectModel().detach(this);
 
-        mySubjectModel = other;
+//         mySubjectModel = other;
 
-        if (getSubjectModel() != null)
-            getSubjectModel().attach(this);
+//         if (getSubjectModel() != null)
+//             getSubjectModel().attach(this);
 
-        }
+//         }
 
-    private void setRedValueTextField(JTextField other)
-    {
+//     private void setRedValueTextField(JTextField other)
+//     {
 
-        myRedValueTextField = other;
+//         myRedValueTextField = other;
 
-        }
+//         }
 
-    private void setGreenValueTextField(JTextField other)
-    {
+//     private void setGreenValueTextField(JTextField other)
+//     {
 
-        myGreenValueTextField = other;
+//         myGreenValueTextField = other;
 
-        }
+//         }
 
-    private void setBlueValueTextField(JTextField other)
-    {
+//     private void setBlueValueTextField(JTextField other)
+//     {
 
-        myBlueValueTextField = other;
+//         myBlueValueTextField = other;
 
-        }
+//         }
 
-    //
-    // Ctors
-    //
+//     //
+//     // Ctors
+//     //
 
-    public RGBValuesViewAndController()
-    {
+//     public RGBValuesViewAndController()
+//     {
 
-        this(null);
+//         this(null);
 
-        }
+//         }
 
-    public RGBValuesViewAndController(ObservableRGBValue initialRgb)
-    {
+//     public RGBValuesViewAndController(ObservableRGBValue initialRgb)
+//     {
 
-        setSize(OUR_DEFAULT_FRAME_WIDTH, OUR_DEFAULT_FRAME_HEIGHT);
+//         setSize(OUR_DEFAULT_FRAME_WIDTH, OUR_DEFAULT_FRAME_HEIGHT);
 
-        setSubjectModel(initialRgb);
+//         setSubjectModel(initialRgb);
 
-        //
-        // Create text fields for displaying and altering the color levels of the model
-        //
+//         //
+//         // Create text fields for displaying and altering the color levels of the model
+//         //
 
-            setRedValueTextField(
-                new JTextField(
-                    "" + getSubjectModel().getRedValue(),
-                    OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH
-                    )
-                );
-            setGreenValueTextField(
-                new JTextField(
-                    "" + getSubjectModel().getGreenValue(),
-                    OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH
-                    )
-                );
-            setBlueValueTextField(
-                new JTextField(
-                    "" + getSubjectModel().getBlueValue(),
-                    OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH
-                    )
-                );
+//             setRedValueTextField(
+//                 new JTextField(
+//                     "" + getSubjectModel().getRedValue(),
+//                     OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH
+//                     )
+//                 );
+//             setGreenValueTextField(
+//                 new JTextField(
+//                     "" + getSubjectModel().getGreenValue(),
+//                     OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH
+//                     )
+//                 );
+//             setBlueValueTextField(
+//                 new JTextField(
+//                     "" + getSubjectModel().getBlueValue(),
+//                     OUR_DEFAULT_COMPONENT_FIELD_AND_AREA_WIDTH
+//                     )
+//                 );
 
-        //
-        // Create labels for the text fields
-        //
+//         //
+//         // Create labels for the text fields
+//         //
 
-            JLabel redLabel = new JLabel("Red:", JLabel.RIGHT);
-            JLabel greenLabel = new JLabel("Green:", JLabel.RIGHT);
-            JLabel blueLabel = new JLabel("Blue:", JLabel.RIGHT);
+//             JLabel redLabel = new JLabel("Red:", JLabel.RIGHT);
+//             JLabel greenLabel = new JLabel("Green:", JLabel.RIGHT);
+//             JLabel blueLabel = new JLabel("Blue:", JLabel.RIGHT);
 
-        //
-        // Create a panel to hold the labels and the text fields
-        //
+//         //
+//         // Create a panel to hold the labels and the text fields
+//         //
 
-            setPanel(new JPanel());
-            getPanel().setLayout(new GridLayout(3, 2));
+//             setPanel(new JPanel());
+//             getPanel().setLayout(new GridLayout(3, 2));
 
-        //
-        // Add the labels and the text fields, in the order they should appear, to the
-        // panel
-        //
+//         //
+//         // Add the labels and the text fields, in the order they should appear, to the
+//         // panel
+//         //
 
-            getPanel().add(redLabel);
-            getPanel().add(getRedValueTextField());
-            getPanel().add(greenLabel);
-            getPanel().add(getGreenValueTextField());
-            getPanel().add(blueLabel);
-            getPanel().add(getBlueValueTextField());
+//             getPanel().add(redLabel);
+//             getPanel().add(getRedValueTextField());
+//             getPanel().add(greenLabel);
+//             getPanel().add(getGreenValueTextField());
+//             getPanel().add(blueLabel);
+//             getPanel().add(getBlueValueTextField());
 
-        //
-        // Add the panel to the container
-        //
+//         //
+//         // Add the panel to the container
+//         //
 
-            add(getPanel());
+//             add(getPanel());
 
-        //
-        // Create an action to alter the model's color when input is entered
-        //
+//         //
+//         // Create an action to alter the model's color when input is entered
+//         //
 
-            RGBInputAction inputAction = new RGBInputAction();
+//             RGBInputAction inputAction = new RGBInputAction();
 
-        //
-        // Associate the action with the text fields
-        //
+//         //
+//         // Associate the action with the text fields
+//         //
 
-            getRedValueTextField().addActionListener(inputAction);
-            getGreenValueTextField().addActionListener(inputAction);
-            getBlueValueTextField().addActionListener(inputAction);
+//             getRedValueTextField().addActionListener(inputAction);
+//             getGreenValueTextField().addActionListener(inputAction);
+//             getBlueValueTextField().addActionListener(inputAction);
 
-        }
+//         }
 
-    //
-    // Observation methods
-    //
+//     //
+//     // Observation methods
+//     //
 
-    @Override
-    public void update()
-    {
+//     @Override
+//     public void update()
+//     {
 
-        //
-        // Set the text in the text fields to display the color levels of the updated
-        // color specified by the model
-        //
+//         //
+//         // Set the text in the text fields to display the color levels of the updated
+//         // color specified by the model
+//         //
 
-            getRedValueTextField().setText("" + getSubjectModel().getRedValue());
-            getGreenValueTextField().setText("" + getSubjectModel().getGreenValue());
-            getBlueValueTextField().setText("" + getSubjectModel().getBlueValue());
+//             getRedValueTextField().setText("" + getSubjectModel().getRedValue());
+//             getGreenValueTextField().setText("" + getSubjectModel().getGreenValue());
+//             getBlueValueTextField().setText("" + getSubjectModel().getBlueValue());
 
-        }
+//         }
 
 
-    private class RGBInputAction implements ActionListener
-    {
+//     private class RGBInputAction implements ActionListener
+//     {
 
-        //
-        // Ctors
-        //
+//         //
+//         // Ctors
+//         //
 
-        public RGBInputAction()
-        {
+//         public RGBInputAction()
+//         {
 
-            }
+//             }
 
-        //
-        // Event handlers
-        //
+//         //
+//         // Event handlers
+//         //
 
-        @Override
-        public void actionPerformed(ActionEvent event)
-        {
+//         @Override
+//         public void actionPerformed(ActionEvent event)
+//         {
 
-            if (getSubjectModel() != null) {
+//             if (getSubjectModel() != null) {
 
-                //
-                // Let redValue, greenValue, and blueValue be the integers typed in the
-                // red, green, and blue value text fields, respectively (using 0 as the
-                // value for a text field that does not contain an integer or contains
-                // a negative integer and using 255 as the value for a text field that
-                // contains an integer greater than 255)
-                //
+//                 //
+//                 // Let redValue, greenValue, and blueValue be the integers typed in the
+//                 // red, green, and blue value text fields, respectively (using 0 as the
+//                 // value for a text field that does not contain an integer or contains
+//                 // a negative integer and using 255 as the value for a text field that
+//                 // contains an integer greater than 255)
+//                 //
 
-                    Scanner redValueScanner =
-                        new Scanner(getRedValueTextField().getText());
-                    Scanner greenValueScanner =
-                        new Scanner(getGreenValueTextField().getText());
-                    Scanner blueValueScanner =
-                        new Scanner(getBlueValueTextField().getText());
+//                     Scanner redValueScanner =
+//                         new Scanner(getRedValueTextField().getText());
+//                     Scanner greenValueScanner =
+//                         new Scanner(getGreenValueTextField().getText());
+//                     Scanner blueValueScanner =
+//                         new Scanner(getBlueValueTextField().getText());
 
-                    int redValue =
-                        redValueScanner.hasNextInt()
-                            ? Math.max(0, Math.min(255, redValueScanner.nextInt()))
-                            : 0;
-                    int greenValue =
-                        greenValueScanner.hasNextInt()
-                            ? Math.max(0, Math.min(255, greenValueScanner.nextInt()))
-                            : 0;
-                    int blueValue =
-                        blueValueScanner.hasNextInt()
-                            ? Math.max(0, Math.min(255, blueValueScanner.nextInt()))
-                            : 0;
+//                     int redValue =
+//                         redValueScanner.hasNextInt()
+//                             ? Math.max(0, Math.min(255, redValueScanner.nextInt()))
+//                             : 0;
+//                     int greenValue =
+//                         greenValueScanner.hasNextInt()
+//                             ? Math.max(0, Math.min(255, greenValueScanner.nextInt()))
+//                             : 0;
+//                     int blueValue =
+//                         blueValueScanner.hasNextInt()
+//                             ? Math.max(0, Math.min(255, blueValueScanner.nextInt()))
+//                             : 0;
 
-                //
-                // Alter the red, green, and blue levels of the model to the redValue,
-                // greenValue, and blueValue, respectively
-                //
+//                 //
+//                 // Alter the red, green, and blue levels of the model to the redValue,
+//                 // greenValue, and blueValue, respectively
+//                 //
 
-                    getSubjectModel().setRedValue(redValue);
-                    getSubjectModel().setGreenValue(greenValue);
-                    getSubjectModel().setBlueValue(blueValue);
+//                     getSubjectModel().setRedValue(redValue);
+//                     getSubjectModel().setGreenValue(greenValue);
+//                     getSubjectModel().setBlueValue(blueValue);
 
-                }
+//                 }
 
-            }
+//             }
 
-        }
+//         }
 
 
-    }
+//     }
