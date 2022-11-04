@@ -4,29 +4,40 @@ class ObservableVM252Debugger extends SimpleObservable
     private int myACC;
     private int myPC;
     private int myMemory;
+    private String instruction;
+    private String [] displayContents;
 
-    public int getmyACCValue()
+    public int getAccValue()
     {
 
         return myACC;
 
         }
 
-    public int getmyPCValue()
+    public int getPCValue()
     {
 
         return myPC;
 
         }
 
-    public int getmyMemoryValue()
+    public int getMemoryValue()
     {
 
         return myMemory;
 
         }
+    
+    public String getInstruction(){
+        return instruction;
+    }
 
-    public void setmyACCValue(int other)
+    public String [] getDisplayContents()
+    {
+        return displayContents;
+    }
+
+    public void setAccValue(int other)
     {
 
         myACC = other;
@@ -35,7 +46,7 @@ class ObservableVM252Debugger extends SimpleObservable
 
         }
 
-    public void setmyPCValue(int other)
+    public void setPCValue(int other)
     {
 
         myPC = other;
@@ -44,7 +55,7 @@ class ObservableVM252Debugger extends SimpleObservable
 
         }
 
-    public void setmyMemoryValue(int other)
+    public void setMemoryValue(int other)
     {
 
         myMemory = other;
@@ -52,27 +63,40 @@ class ObservableVM252Debugger extends SimpleObservable
         announceChange();
 
         }
+    
+    public void setInstruction(String other) {
+        instruction = other;
+    }
 
+    public void setDisplayContents(String [] other)
+    {
+        displayContents = other;
+        announceChange();
+    }
     ObservableVM252Debugger()
     {
 
         super();
+        String [] welcomeContents = {"Welcome to VM252 debugger GUI"};
 
-        setmyACCValue(0);
-        setmyPCValue(0);
-        setmyMemoryValue(0);
+        setAccValue(0);
+        setPCValue(0);
+        setMemoryValue(0);
+        setInstruction("Null");
+        setDisplayContents(welcomeContents);
 
         }
 
-    ObservableVM252Debugger(int initialmyACCValue, int initialmyPCValue, int initialmyMemoryValue)
+    ObservableVM252Debugger(int initialAccValue, int initialPCValue, int initialMemoryValue, String initialInstruction, String [] initialDisplayContents)
     {
 
         super();
 
-        setmyACCValue(initialmyACCValue);
-        setmyPCValue(initialmyPCValue);
-        setmyMemoryValue(initialmyMemoryValue);
+        setAccValue(initialAccValue);
+        setPCValue(initialPCValue);
+        setMemoryValue(initialMemoryValue);
+        setInstruction(initialInstruction);
+        setDisplayContents(initialDisplayContents);
 
         }
-
     }

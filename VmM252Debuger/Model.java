@@ -56,5 +56,6 @@ class ObservableVM252Machine{
         setACCValue(initialACCValue);
         setPCValue(initialPCValue);
         setMemoryValue(initialMemoryValue);
+
     }
 }

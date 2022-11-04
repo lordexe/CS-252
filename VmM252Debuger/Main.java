@@ -21,7 +21,7 @@ public class Main{
 
 class ProgramFrame extends JFrame{
 
-    private static final int OUR_DEFAULT_WIDTH = 1000;
+    private static final int OUR_DEFAULT_WIDTH = 800;
     private static final int OUR_DEFAULT_HEIGHT = 1000;
 
     private JPanel myPanel;
@@ -43,11 +43,21 @@ class ProgramFrame extends JFrame{
 
         FunctionButtonsPanel buttonsPanel = new FunctionButtonsPanel(machine);
 
+        // viewMachinePanel machinePanel = new viewMachinePanel(machine);
+        
+        DisplayRunPanel runningPanel = new DisplayRunPanel(machine);
         setPanel(new JPanel());
         getPanel().setLayout(null);
 
         buttonsPanel.setBounds(0, 0, 800, 100);
         getPanel().add(buttonsPanel);
+
+        // machinePanel.setBounds(100,0,800,200);
+        // getPanel().add(machinePanel);
+
+        runningPanel.setBounds(0, 500, 800, 300);
+        getPanel().add(runningPanel);
+
 
         add(getPanel());
 
