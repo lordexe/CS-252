@@ -6,7 +6,7 @@ import javax.swing.JList;
 public class DisplayRunPanel extends JPanel implements SimpleObserver
 {
     private static final int OUR_DEFAULT_WIDTH = 500;
-    private static final int OUR_DEFAULT_HEIGHT = 250;
+    private static final int OUR_DEFAULT_HEIGHT = 300;
 
     private JPanel myPanel;
     private ObservableVM252Debugger mySubject;
