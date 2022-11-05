@@ -43,7 +43,7 @@ class ProgramFrame extends JFrame{
 
         FunctionButtonsPanel buttonsPanel = new FunctionButtonsPanel(machine);
 
-        // viewMachinePanel machinePanel = new viewMachinePanel(machine);
+        buttonsViewAndController DisplayPanel = new buttonsViewAndController(machine);
         
         DisplayRunPanel runningPanel = new DisplayRunPanel(machine);
         setPanel(new JPanel());
@@ -52,8 +52,8 @@ class ProgramFrame extends JFrame{
         buttonsPanel.setBounds(0, 0, 800, 100);
         getPanel().add(buttonsPanel);
 
-        // machinePanel.setBounds(100,0,800,200);
-        // getPanel().add(machinePanel);
+        DisplayPanel.setBounds(50,0,800,200);
+        getPanel().add(DisplayPanel);
 
         runningPanel.setBounds(0, 500, 800, 300);
         getPanel().add(runningPanel);

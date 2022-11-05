@@ -1,8 +1,10 @@
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
+
 import javax.swing.*;
 
-public class textFields extends JPanel implements SimpleObserver
+public class buttonsViewAndController extends JPanel implements SimpleObserver
 {
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;
@@ -10,7 +12,7 @@ public class textFields extends JPanel implements SimpleObserver
 
 
     private JPanel myJPanel;
-    private ObserveButtons myButtons;
+    private ObservableVM252Debugger myButtons;
     private JTextField myACCTextField;
     private JTextField myPCTextField;
     private JTextField myInstructionTextField;
@@ -40,7 +42,7 @@ public class textFields extends JPanel implements SimpleObserver
     {
         return myMemoryTextField;
     }
-    private ObserveButtons getButtons()
+    private ObservableVM252Debugger getButtons()
     {
         return myButtons;
     }
@@ -72,26 +74,26 @@ public class textFields extends JPanel implements SimpleObserver
         myMemoryTextField = other;
     }
 
-    private void setButtons(ObserveButtons)
+    private void setButtons(ObservableVM252Debugger other)
     {
         if (getButtons() != null)
-            getButtons().detatch(this);
+            getButtons().detach(this);
 
         myButtons = other;
 
         if (getButtons() != null)
-            getButtons().detatch(this);
+            getButtons().detach(this);
     }
     //Ctors
 
     public buttonsViewAndController()
     {
-        this (null)
+        this (null);
     }
 
 
 
-    public buttonsViewAndController(ObserveButtons initialValues)
+    public buttonsViewAndController(ObservableVM252Debugger initialValues)
     {
         setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
 
@@ -99,13 +101,13 @@ public class textFields extends JPanel implements SimpleObserver
 
         // Creating text fields
 
-        setACCTextFieldValue(new JTextField("" + getButtons().getACC(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setACCTextFieldValue(new JTextField("" + getButtons().getAccValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setPCTextFieldValue(new JTextField("" + getButtons().getPC(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setPCTextFieldValue(new JTextField("" + getButtons().getPCValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
         setInstructionTextFieldValue(new JTextField("" + getButtons().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setMemoryTextFieldValue(new JTextField("" + getButtons().getMemory(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setMemoryTextFieldValue(new JTextField("" + getButtons().getMemoryValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
         //Creating labels
 
@@ -152,10 +154,10 @@ public class textFields extends JPanel implements SimpleObserver
     {
         //set text fields to display the updated information
 
-        getACCTextField().setText("" + getButtons().getACC());
-        getPCTextField().setText("" + getButtons().getPC());
+        getACCTextField().setText("" + getButtons().getAccValue());
+        getPCTextField().setText("" + getButtons().getPCValue());
         getInstructionTextField().setText("" + getButtons().getInstruction());
-        getMemoryTextField().setText("" + getButtons().getMemory());
+        getMemoryTextField().setText("" + getButtons().getMemoryValue());
     }
 
     private class commandInputAction implements ActionListener
@@ -178,17 +180,24 @@ public class textFields extends JPanel implements SimpleObserver
 
                 Scanner PCValueScanner = new Scanner(getPCTextField().getText());
 
-                Scanner InstructionValueScanner = new Scanner(getInctructionTextField().getText());
+                Scanner InstructionValueScanner = new Scanner(getInstructionTextField().getText());
 
                 Scanner MemoryValueScanner = new Scanner(getMemoryTextField().getText());
 
-                int ACCValue = ACCValueScanner.hasNextInt();
+                int ACCValue = ACCValueScanner.hasNextInt()? ACCValueScanner.nextInt():0;
 
-                int PCValue = PCValueScanner.hasNextInt();
+                int PCValue = PCValueScanner.hasNextInt() ? PCValueScanner.nextInt(): 0;
 
                 String InstructionValue = InstructionValueScanner.next();
 
-                int MemoryValue = MemoryValueScanner.hasNextInt();
+                int MemoryValue = MemoryValueScanner.hasNextInt() ? MemoryValueScanner.nextInt(): 0;
+
+                getButtons().setAccValue(ACCValue);
+                getButtons().setPCValue(PCValue);
+                getButtons().setInstruction(InstructionValue);
+                getButtons().setMemoryValue(MemoryValue);
+
+
             }
         }
     }
