@@ -2,8 +2,8 @@ import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class FunctionButtonsPanel extends JPanel
-{
+public class FunctionButtonsPanel extends JPanel{
+
     private static final int OUR_DEFAULT_WIDTH = 600;
     private static final int OUR_DEFAULT_HEIGHT = 300;
 
@@ -13,8 +13,7 @@ public class FunctionButtonsPanel extends JPanel
     // Accessors
     //
 
-    private JPanel getPanel()
-    {
+    private JPanel getPanel(){
         return myPanel;
     }
 
@@ -22,8 +21,7 @@ public class FunctionButtonsPanel extends JPanel
     // Mutators
     //
 
-    private void setPanel(JPanel other)
-    {
+    private void setPanel(JPanel other){
         myPanel = other;
     }
 
@@ -31,16 +29,14 @@ public class FunctionButtonsPanel extends JPanel
     // Ctors
     //
 
-    public FunctionButtonsPanel()
-    {
+    public FunctionButtonsPanel(){
         this(null);
     }
 
-    public FunctionButtonsPanel(ObservableVM252Debugger machine)
-    {
+    public FunctionButtonsPanel(ObservableVM252Debugger machine){
 
         //
-        // Create button controller
+        // Create button controller from Buttons Controller
         //
 
         ButtonsController buttons = new ButtonsController(machine);

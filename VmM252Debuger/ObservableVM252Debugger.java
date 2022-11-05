@@ -7,6 +7,8 @@ class ObservableVM252Debugger extends SimpleObservable
     private String instruction;
     private String [] displayContents;
 
+    //Accessors
+
     public int getAccValue()
     {
 
@@ -36,6 +38,8 @@ class ObservableVM252Debugger extends SimpleObservable
     {
         return displayContents;
     }
+
+    //Murators
 
     public void setAccValue(int other)
     {
@@ -73,6 +77,9 @@ class ObservableVM252Debugger extends SimpleObservable
         displayContents = other;
         announceChange();
     }
+
+    // Ctors
+
     ObservableVM252Debugger()
     {
 
@@ -99,7 +106,4 @@ class ObservableVM252Debugger extends SimpleObservable
         setDisplayContents(initialDisplayContents);
 
         }
-
-    public void detatch(buttonsViewAndController buttonsViewAndController) {
-    }
-    }
+}

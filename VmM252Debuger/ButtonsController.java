@@ -18,6 +18,7 @@ public class ButtonsController extends JPanel
     private JLabel toolbarLabel, baLabel;
     private JTextField input_ba;
 
+    //Accessors
 
     private JPanel getPanel()
     {
@@ -29,6 +30,7 @@ public class ButtonsController extends JPanel
         return myModel;
     }
 
+    // Murators
 
     private void setPanel(JPanel other)
     {
@@ -43,6 +45,7 @@ public class ButtonsController extends JPanel
     //
     // Constructors
     //
+    
     public ButtonsController()
     {
         this(null);
@@ -62,6 +65,8 @@ public class ButtonsController extends JPanel
         Cmd_n = new JButton(" n ");
         Cmd_q = new JButton(" q ");
         Cmd_r = new JButton(" r ");
+        Cmd_ba = new JButton(" ba ");
+
         baLabel = new JLabel(" ba: ");
         input_ba = new JTextField("enter value for ba", 10);
         stop = new JButton("Stop");
@@ -77,8 +82,10 @@ public class ButtonsController extends JPanel
         tool_bar.add(Cmd_n);
         tool_bar.add(Cmd_q);
         tool_bar.add(Cmd_r);
+        tool_bar.add(Cmd_ba);
         tool_bar.add(baLabel);
         tool_bar.add(input_ba);
+        tool_bar.add(stop);
         tool_bar.add(resume);
         tool_bar.add(instructionIncrease);
         tool_bar.add(instructionDecrease);

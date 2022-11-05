@@ -7,7 +7,12 @@ public class Main{
     {
         EventQueue.invokeLater(
             () ->{
+
+                    //Create progame frame
+
                     ProgramFrame frame = new ProgramFrame();
+
+                    // Set frame's visibility and closing behavior
 
                     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
                     frame.setVisible(true);
@@ -26,28 +31,49 @@ class ProgramFrame extends JFrame{
 
     private JPanel myPanel;
 
+    //Accessor
+
     private JPanel getPanel()
     {
         return myPanel;
     }
 
+    //Murator
+
     private void setPanel(JPanel other){
         myPanel = other;
     }
 
+    // Ctors
+
     public ProgramFrame(){
+
+        //Set title
         setTitle("VM252 Debuger GUI");
         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
 
+        // Create Model Object 
+
         ObservableVM252Debugger machine = new ObservableVM252Debugger();
+
+        // Create button pannel
 
         FunctionButtonsPanel buttonsPanel = new FunctionButtonsPanel(machine);
 
+        // Create hybrid view-controller pannel
+        
         buttonsViewAndController DisplayPanel = new buttonsViewAndController(machine);
 
+        // Create running debuger process pannel
+
         DisplayRunPanel runningPanel = new DisplayRunPanel(machine);
+
+        // Create panel to hold all views and controllers
+
         setPanel(new JPanel());
         getPanel().setLayout(null);
+
+        // Add and setBounds, views and controllers to panel
         
         DisplayPanel.setBounds(200,100,800,200);
         getPanel().add(DisplayPanel);
