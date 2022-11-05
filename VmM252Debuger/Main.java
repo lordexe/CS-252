@@ -44,16 +44,16 @@ class ProgramFrame extends JFrame{
         FunctionButtonsPanel buttonsPanel = new FunctionButtonsPanel(machine);
 
         buttonsViewAndController DisplayPanel = new buttonsViewAndController(machine);
-        
+
         DisplayRunPanel runningPanel = new DisplayRunPanel(machine);
         setPanel(new JPanel());
         getPanel().setLayout(null);
+        
+        DisplayPanel.setBounds(200,100,800,200);
+        getPanel().add(DisplayPanel);
 
         buttonsPanel.setBounds(0, 0, 800, 100);
         getPanel().add(buttonsPanel);
-
-        DisplayPanel.setBounds(50,0,800,200);
-        getPanel().add(DisplayPanel);
 
         runningPanel.setBounds(0, 500, 800, 300);
         getPanel().add(runningPanel);

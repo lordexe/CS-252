@@ -99,4 +99,7 @@ class ObservableVM252Debugger extends SimpleObservable
         setDisplayContents(initialDisplayContents);
 
         }
+
+    public void detatch(buttonsViewAndController buttonsViewAndController) {
+    }
     }
