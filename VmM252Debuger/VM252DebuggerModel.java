@@ -1,4 +1,4 @@
-class ObservableVM252Debugger extends SimpleObservable
+class VM252DebuggerModel extends SimpleObservable
 {
 
     private int myACC;
@@ -80,7 +80,7 @@ class ObservableVM252Debugger extends SimpleObservable
 
     // Ctors
 
-    ObservableVM252Debugger()
+    VM252DebuggerModel()
     {
 
         super();
@@ -94,7 +94,7 @@ class ObservableVM252Debugger extends SimpleObservable
 
         }
 
-    ObservableVM252Debugger(int initialAccValue, int initialPCValue, int initialMemoryValue, String initialInstruction, String [] initialDisplayContents)
+        VM252DebuggerModel(int initialAccValue, int initialPCValue, int initialMemoryValue, String initialInstruction, String [] initialDisplayContents)
     {
 
         super();

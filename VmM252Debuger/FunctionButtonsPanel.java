@@ -33,7 +33,7 @@ public class FunctionButtonsPanel extends JPanel{
         this(null);
     }
 
-    public FunctionButtonsPanel(ObservableVM252Debugger machine){
+    public FunctionButtonsPanel(VM252DebuggerModel machine){
 
         //
         // Create button controller from Buttons Controller

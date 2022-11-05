@@ -12,7 +12,7 @@ public class buttonsViewAndController extends JPanel implements SimpleObserver
 
 
     private JPanel myJPanel;
-    private ObservableVM252Debugger myButtons;
+    private VM252DebuggerModel myButtons;
     private JTextField myACCTextField;
     private JTextField myPCTextField;
     private JTextField myInstructionTextField;
@@ -42,7 +42,7 @@ public class buttonsViewAndController extends JPanel implements SimpleObserver
     {
         return myMemoryTextField;
     }
-    private ObservableVM252Debugger getButtons()
+    private VM252DebuggerModel getButtons()
     {
         return myButtons;
     }
@@ -74,7 +74,7 @@ public class buttonsViewAndController extends JPanel implements SimpleObserver
         myMemoryTextField = other;
     }
 
-    private void setButtons(ObservableVM252Debugger other)
+    private void setButtons(VM252DebuggerModel other)
     {
         if (getButtons() != null)
             getButtons().detach(this);
@@ -93,7 +93,7 @@ public class buttonsViewAndController extends JPanel implements SimpleObserver
 
 
 
-    public buttonsViewAndController(ObservableVM252Debugger initialValues)
+    public buttonsViewAndController(VM252DebuggerModel initialValues)
     {
         setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
 

@@ -6,7 +6,7 @@ import javax.swing.*;
 public class ButtonsController extends JPanel
 {
     private JPanel myPanel;
-    private ObservableVM252Debugger myModel;
+    private VM252DebuggerModel myModel;
 
     // toolbar
 
@@ -25,7 +25,7 @@ public class ButtonsController extends JPanel
         return myPanel;
     }
 
-    private ObservableVM252Debugger getModel()
+    private VM252DebuggerModel getModel()
     {
         return myModel;
     }
@@ -37,7 +37,7 @@ public class ButtonsController extends JPanel
         myPanel = other;
     }
 
-    private void setModel(ObservableVM252Debugger other)
+    private void setModel(VM252DebuggerModel other)
     {
         myModel = other;
     }
@@ -51,7 +51,7 @@ public class ButtonsController extends JPanel
         this(null);
     }
 
-    public ButtonsController(ObservableVM252Debugger initialModel)
+    public ButtonsController(VM252DebuggerModel initialModel)
     {
         setModel(initialModel);
 

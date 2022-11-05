@@ -54,7 +54,7 @@ class ProgramFrame extends JFrame{
 
         // Create Model Object 
 
-        ObservableVM252Debugger machine = new ObservableVM252Debugger();
+        VM252DebuggerModel machine = new VM252DebuggerModel();
 
         // Create button pannel
 
@@ -75,13 +75,13 @@ class ProgramFrame extends JFrame{
 
         // Add and setBounds, views and controllers to panel
         
-        DisplayPanel.setBounds(200,100,800,200);
+        DisplayPanel.setBounds(500,100,300,200);
         getPanel().add(DisplayPanel);
 
         buttonsPanel.setBounds(0, 0, 800, 100);
         getPanel().add(buttonsPanel);
 
-        runningPanel.setBounds(0, 500, 800, 300);
+        runningPanel.setBounds(0, 100, 500, 300);
         getPanel().add(runningPanel);
 
 

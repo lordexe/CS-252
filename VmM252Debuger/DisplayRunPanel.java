@@ -9,7 +9,7 @@ public class DisplayRunPanel extends JPanel implements SimpleObserver
     private static final int OUR_DEFAULT_HEIGHT = 300;
 
     private JPanel myPanel;
-    private ObservableVM252Debugger mySubject;
+    private VM252DebuggerModel mySubject;
     private String [] myContents;
     private JTextArea displayBox;
 
@@ -22,7 +22,7 @@ public class DisplayRunPanel extends JPanel implements SimpleObserver
         return myPanel;
     }
 
-    private ObservableVM252Debugger getSubject()
+    private VM252DebuggerModel getSubject()
     {
         return mySubject;
     }
@@ -51,7 +51,7 @@ public class DisplayRunPanel extends JPanel implements SimpleObserver
         myContents = other;
     }
 
-    private void setSubject(ObservableVM252Debugger other)
+    private void setSubject(VM252DebuggerModel other)
     {
         if (getSubject() != null)
             getSubject().detach(this);
@@ -77,7 +77,7 @@ public class DisplayRunPanel extends JPanel implements SimpleObserver
         this(null);
     }
 
-    public DisplayRunPanel(ObservableVM252Debugger machine)
+    public DisplayRunPanel(VM252DebuggerModel machine)
     {
         setSubject(machine);
         setContents(getSubject().getDisplayContents());
