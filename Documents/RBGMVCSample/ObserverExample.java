@@ -1,3 +1,6 @@
+import model.SimpleObservable;
+import model.SimpleObserver;
+
 public class ObserverExample
 {
 

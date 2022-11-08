@@ -1,3 +1,5 @@
+import model.SimpleObservable;
+
 class ObservableRGBValue extends SimpleObservable
 {
 
