@@ -1,7 +1,12 @@
+package viewAndController;
+
 import java.awt.*;
 import java.util.Scanner;
 import java.awt.event.*;
 import javax.swing.*;
+
+import model.VM252DebuggerModel;
+
 
 public class ButtonsController extends JPanel
 {

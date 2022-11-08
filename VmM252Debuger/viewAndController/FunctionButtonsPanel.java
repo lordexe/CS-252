@@ -1,3 +1,6 @@
+package viewAndController;
+
+import model.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;

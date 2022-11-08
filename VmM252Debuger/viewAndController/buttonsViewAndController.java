@@ -1,8 +1,12 @@
+package viewAndController;
+
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Scanner;
 
 import javax.swing.*;
+
+import model.*;
 
 public class buttonsViewAndController extends JPanel implements SimpleObserver
 {

@@ -1,4 +1,5 @@
-class VM252DebuggerModel extends SimpleObservable
+package model;
+public class VM252DebuggerModel extends SimpleObservable
 {
 
     private int myACC;
@@ -80,7 +81,7 @@ class VM252DebuggerModel extends SimpleObservable
 
     // Ctors
 
-    VM252DebuggerModel()
+    public VM252DebuggerModel()
     {
 
         super();

@@ -1,3 +1,5 @@
+import model.VM252DebuggerModel;
+import viewAndController.*;
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
