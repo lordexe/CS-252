@@ -80,6 +80,23 @@ public class ButtonsController extends JPanel
         instructionDecrease = new JButton ("Decrease Speed");
         Help_h = new JButton(" Help ");
 
+        // add the help functionality
+        // to print what all the other commands do
+        // using an eventlistenr
+
+        Help_h.addActionListener(new ActionListener(){
+	        public void actionPerformed(ActionEvent e){
+                String [] helpContents = {"ba MA = Set a breakpoint at address MA",
+                "help = Display help messages",
+                "n = Execute the next machine instruction",
+                "q = Quit",
+                "r = Run machine until error occurs or stop instruction is triggered"
+                };
+		        getModel().setDisplayContents(helpContents);
+            }});
+
+
+        
         // Add the buttons to the toolbar
 
         tool_bar.setFloatable(false);
