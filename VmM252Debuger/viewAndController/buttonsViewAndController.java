@@ -6,8 +6,8 @@ import java.util.Scanner;
 
 import javax.swing.*;
 
-import model.*;
-
+import model.VM252DebuggerModel;
+import observation.SimpleObserver;
 public class buttonsViewAndController extends JPanel implements SimpleObserver
 {
     private static final int OUR_FRAME_WIDTH = 300;

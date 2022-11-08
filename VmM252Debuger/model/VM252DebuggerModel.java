@@ -1,4 +1,5 @@
 package model;
+import observation.SimpleObservable;
 public class VM252DebuggerModel extends SimpleObservable
 {
 
