@@ -3,12 +3,12 @@ package viewAndController;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Scanner;
-
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
-import observation.SimpleObserver;
-public class buttonsViewAndController extends JPanel implements SimpleObserver
+import observation.*;
+
+public class buttonsViewAndController extends JPanel implements Observer
 {
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;

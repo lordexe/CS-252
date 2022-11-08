@@ -6,9 +6,9 @@ import javax.swing.*;
 import javax.swing.JList;
 
 import model.VM252DebuggerModel;
-import observation.SimpleObserver;
+import observation.*;
 
-public class DisplayRunPanel extends JPanel implements SimpleObserver
+public class DisplayRunPanel extends JPanel implements Observer
 {
     private static final int OUR_DEFAULT_WIDTH = 500;
     private static final int OUR_DEFAULT_HEIGHT = 300;
