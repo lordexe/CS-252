@@ -1,4 +1,4 @@
-package viewAndController;
+package viewAndController.buttonViewAndController;
 
 import java.awt.*;
 import java.util.Scanner;

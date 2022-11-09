@@ -3,7 +3,6 @@ package observation;
 
 import java.util.ArrayList;
 
-
 public class SimpleObservable implements Observable
 {
 
@@ -33,10 +32,10 @@ public class SimpleObservable implements Observable
         }
 
     @Override
-    public void detach(Observer currentObserver)
+    public void detach(Observer anotherObserver)
     {
 
-        observers().remove(currentObserver);
+        observers().remove(anotherObserver);
 
         }
 

@@ -1,11 +1,12 @@
-package viewAndController;
+package viewAndController.buttonViewAndController;
 
 import model.*;
+
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 
-public class FunctionButtonsPanel extends JPanel{
+public class buttonsPanel extends JPanel{
 
     private static final int OUR_DEFAULT_WIDTH = 600;
     private static final int OUR_DEFAULT_HEIGHT = 300;
@@ -32,11 +33,11 @@ public class FunctionButtonsPanel extends JPanel{
     // Ctors
     //
 
-    public FunctionButtonsPanel(){
+    public buttonsPanel(){
         this(null);
     }
 
-    public FunctionButtonsPanel(VM252DebuggerModel machine){
+    public buttonsPanel(VM252DebuggerModel machine){
 
         //
         // Create button controller from Buttons Controller

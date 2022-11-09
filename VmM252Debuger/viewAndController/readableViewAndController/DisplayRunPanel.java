@@ -1,13 +1,14 @@
-package viewAndController;
+package viewAndController.readableViewAndController;
 
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
 import javax.swing.JList;
 
-import model.*;
+import model.VM252DebuggerModel;
+import observation.*;
 
-public class DisplayRunPanel extends JPanel implements SimpleObserver
+public class DisplayRunPanel extends JPanel implements Observer
 {
     private static final int OUR_DEFAULT_WIDTH = 500;
     private static final int OUR_DEFAULT_HEIGHT = 300;
