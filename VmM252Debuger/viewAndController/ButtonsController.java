@@ -82,7 +82,6 @@ public class ButtonsController extends JPanel
 
         // Help button functionality
         // Prints what different commands are used for
-
         Help_h.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
                 String [] helpContents = {"ba MA = Set a breakpoint at address MA",
@@ -94,8 +93,20 @@ public class ButtonsController extends JPanel
 		        getModel().setDisplayContents(helpContents);
             }});
 
-        
+        // Quit button functionality
+        // Closes the program upon clicking on the button
+        ActionListener quitActListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // close the current JFrame
+                ((JFrame)myPanel.getTopLevelAncestor()).dispose();
+            }
+        };
 
+        Cmd_q.addActionListener(quitActListener);
+
+        
+            
         // Add the buttons to the toolbar
 
         tool_bar.setFloatable(false);

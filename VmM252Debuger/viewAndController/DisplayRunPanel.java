@@ -100,6 +100,8 @@ public class DisplayRunPanel extends JPanel implements SimpleObserver
         getDisplayBox().setLineWrap(true);
         getDisplayBox().setEditable(false);
 
+        
+
         JScrollPane scroll = new JScrollPane(getDisplayBox());
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
