@@ -1,4 +1,4 @@
-package viewAndController;
+package viewAndController.JtextViewAndController;
 
 import java.awt.*;
 import java.awt.event.*;
