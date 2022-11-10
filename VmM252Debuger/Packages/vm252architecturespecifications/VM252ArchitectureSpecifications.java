@@ -1,4 +1,4 @@
-package vm252architecturespecifications;
+package Packages.vm252architecturespecifications;
 
 
 import java.util.HashMap;

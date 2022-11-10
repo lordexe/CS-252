@@ -1,4 +1,4 @@
-package vm252simulation;
+package Packages.vm252simulation;
 
 
 import java.io.IOException;
