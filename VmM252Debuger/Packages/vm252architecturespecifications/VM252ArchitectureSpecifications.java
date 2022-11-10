@@ -33,10 +33,10 @@ public class VM252ArchitectureSpecifications
     // Public Class Methods
     //
 
-        public static int nextMemoryAddress(int address)
+        public static int nextMemoryAddress(int address) // <= PC = 0 
         {
 
-            return (address + 1) % MEMORY_SIZE_IN_BYTES;
+            return (address + 1) % MEMORY_SIZE_IN_BYTES; // next PC address -- Int -- Show next instruction (PC + 1)
 
             }
 
@@ -44,7 +44,7 @@ public class VM252ArchitectureSpecifications
         public static int nextMemoryAddress(int address, int increment)
         {
 
-            return (address + increment) % MEMORY_SIZE_IN_BYTES;
+            return (address + increment) % MEMORY_SIZE_IN_BYTES; // // next PC address -- Int -- Show next instruction (PC + 1) // Maybe use for Jumpp
 
             }
 
@@ -596,7 +596,7 @@ public class VM252ArchitectureSpecifications
 
                     }
 
-                public Instruction(byte [] instructionBytes)
+                public Instruction(byte [] instructionBytes) // use this one to declare code 
                     throws IllegalArgumentException
                 {
 

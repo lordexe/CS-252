@@ -111,6 +111,8 @@ public class DisplayRunPanel extends JPanel implements Observer
         setLayout(null);
         add(scroll);
 
+        // change of Display content import inside 
+
     }
 
     @Override
