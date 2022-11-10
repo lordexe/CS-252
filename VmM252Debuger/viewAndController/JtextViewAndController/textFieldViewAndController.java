@@ -8,7 +8,7 @@ import javax.swing.*;
 import model.VM252DebuggerModel;
 import observation.*;
 
-public class buttonsViewAndController extends JPanel implements Observer
+public class textFieldViewAndController extends JPanel implements Observer
 {
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;
@@ -16,7 +16,7 @@ public class buttonsViewAndController extends JPanel implements Observer
 
 
     private JPanel myJPanel;
-    private VM252DebuggerModel myButtons;
+    private VM252DebuggerModel myTextBox;
     private JTextField myACCTextField;
     private JTextField myPCTextField;
     private JTextField myInstructionTextField;
@@ -46,9 +46,9 @@ public class buttonsViewAndController extends JPanel implements Observer
     {
         return myMemoryTextField;
     }
-    private VM252DebuggerModel getButtons()
+    private VM252DebuggerModel getTextBox()
     {
-        return myButtons;
+        return myTextBox;
     }
 
     //Mutators
@@ -78,40 +78,40 @@ public class buttonsViewAndController extends JPanel implements Observer
         myMemoryTextField = other;
     }
 
-    private void setButtons(VM252DebuggerModel other)
+    private void setTextBox(VM252DebuggerModel other)
     {
-        if (getButtons() != null)
-            getButtons().detach(this);
+        if (getTextBox() != null)
+        getTextBox().detach(this);
 
-        myButtons = other;
+        myTextBox = other;
 
-        if (getButtons() != null)
-            getButtons().detach(this);
+        if (getTextBox() != null)
+        getTextBox().detach(this);
     }
     //Ctors
 
-    public buttonsViewAndController()
+    public textFieldViewAndController()
     {
         this (null);
     }
 
 
 
-    public buttonsViewAndController(VM252DebuggerModel initialValues)
+    public textFieldViewAndController(VM252DebuggerModel initialValues)
     {
         setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
 
-        setButtons(initialValues);
+        setTextBox(initialValues);
 
         // Creating text fields
 
-        setACCTextFieldValue(new JTextField("" + getButtons().getAccValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setACCTextFieldValue(new JTextField("" + getTextBox().getAccValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setPCTextFieldValue(new JTextField("" + getButtons().getPCValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setPCTextFieldValue(new JTextField("" + getTextBox().getPCValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setInstructionTextFieldValue(new JTextField("" + getButtons().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setInstructionTextFieldValue(new JTextField("" + getTextBox().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setMemoryTextFieldValue(new JTextField("" + getButtons().getMemoryValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setMemoryTextFieldValue(new JTextField("" + getTextBox().getMemoryValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
         //Creating labels
 
@@ -158,10 +158,10 @@ public class buttonsViewAndController extends JPanel implements Observer
     {
         //set text fields to display the updated information
 
-        getACCTextField().setText("" + getButtons().getAccValue());
-        getPCTextField().setText("" + getButtons().getPCValue());
-        getInstructionTextField().setText("" + getButtons().getInstruction());
-        getMemoryTextField().setText("" + getButtons().getMemoryValue());
+        getACCTextField().setText("" + getTextBox().getAccValue());
+        getPCTextField().setText("" + getTextBox().getPCValue());
+        getInstructionTextField().setText("" + getTextBox().getInstruction());
+        getMemoryTextField().setText("" + getTextBox().getMemoryValue());
     }
 
     private class commandInputAction implements ActionListener
@@ -178,7 +178,7 @@ public class buttonsViewAndController extends JPanel implements Observer
         @Override
         public void actionPerformed(ActionEvent event)
         {
-            if (getButtons() != null)
+            if (getTextBox() != null)
             {
                 Scanner ACCValueScanner = new Scanner(getACCTextField().getText());
 
@@ -196,10 +196,10 @@ public class buttonsViewAndController extends JPanel implements Observer
 
                 int MemoryValue = MemoryValueScanner.hasNextInt() ? MemoryValueScanner.nextInt(): 0;
 
-                getButtons().setAccValue(ACCValue);
-                getButtons().setPCValue(PCValue);
-                getButtons().setInstruction(InstructionValue);
-                getButtons().setMemoryValue(MemoryValue);
+                getTextBox().setAccValue(ACCValue);
+                getTextBox().setPCValue(PCValue);
+                getTextBox().setInstruction(InstructionValue);
+                getTextBox().setMemoryValue(MemoryValue);
 
 
             }
