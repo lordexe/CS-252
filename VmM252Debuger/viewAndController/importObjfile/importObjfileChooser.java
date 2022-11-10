@@ -36,7 +36,7 @@ public class importObjfileChooser extends JFileChooser{
 
 
             // send the Prgrame byte [] to 
-            ProgramFrame frame = new ProgramFrame();
+            ProgramFrame frame = new ProgramFrame(objPrograme);
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);

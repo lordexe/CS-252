@@ -36,7 +36,7 @@ public class ProgramFrame extends JFrame{
         
         // Create Model Object 
     
-        VM252DebuggerModel machine = new VM252DebuggerModel()objProgram);
+        VM252DebuggerModel machine = new VM252DebuggerModel();
     
         // Create button pannel
     
