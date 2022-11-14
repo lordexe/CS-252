@@ -3,8 +3,8 @@ package viewAndController;
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
-import viewAndController.JtextViewAndController.buttonsViewAndController;
-import viewAndController.buttonViewAndController.buttonsPanel;
+import viewAndController.JtextViewAndController.textFieldViewAndController;
+import viewAndController.buttonViewAndController.*;
 import viewAndController.readableViewAndController.DisplayRunPanel;
 public class ProgramFrame extends JFrame{
 
@@ -37,14 +37,14 @@ public class ProgramFrame extends JFrame{
         // Create Model Object 
     
         VM252DebuggerModel machine = new VM252DebuggerModel();
+
+        // create text FieldView pannel
+
+        textFieldViewAndController DisplayPanel = new textFieldViewAndController(machine);
     
         // Create button pannel
     
         buttonsPanel buttonsPanel = new buttonsPanel(machine);
-    
-        // Create hybrid view-controller pannel
-        
-        buttonsViewAndController DisplayPanel = new buttonsViewAndController(machine);
     
         // Create running debuger process pannel
     

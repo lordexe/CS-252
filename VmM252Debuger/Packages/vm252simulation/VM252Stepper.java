@@ -4,13 +4,11 @@ package Packages.vm252simulation;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
+
+import Packages.vm252architecturespecifications.VM252ArchitectureSpecifications;
+import Packages.vm252architecturespecifications.VM252ArchitectureSpecifications.Instruction;
+
 import java.lang.Math;
-
-
-import vm252architecturespecifications.VM252ArchitectureSpecifications;
-import vm252architecturespecifications.VM252ArchitectureSpecifications.Instruction;
-
-
 public class VM252Stepper
 {
 

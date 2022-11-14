@@ -3,7 +3,7 @@ package Packages.vm252simulation;
 
 import observation.Observer;
 import observation.SimpleObservable;
-import vm252architecturespecifications.VM252ArchitectureSpecifications;
+import Packages.vm252architecturespecifications.VM252ArchitectureSpecifications;
 
 
 public class VM252Model extends SimpleObservable implements ObservableVM252
