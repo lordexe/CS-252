@@ -13,6 +13,7 @@ public class textFieldViewAndController extends JPanel implements Observer
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;
     private static final int OUR_COMPONENT_FIELD_AND_AREA_WIDTH = 5;
+    private static final int OUR_MEMORY_FIELD_AND_AREA_WIDTH = 50;
 
 
     private JPanel myJPanel;
@@ -111,7 +112,7 @@ public class textFieldViewAndController extends JPanel implements Observer
 
         setInstructionTextFieldValue(new JTextField("" + getTextBox().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setMemoryTextFieldValue(new JTextField("" + getTextBox().getMemoryValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setMemoryTextFieldValue(new JTextField("" + getTextBox().getMemoryValue(), OUR_MEMORY_FIELD_AND_AREA_WIDTH));
 
         //Creating labels
 
