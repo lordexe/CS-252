@@ -8,6 +8,7 @@ public class VM252DebuggerModel extends SimpleObservable
     private int myMemory;
     private String instruction;
     private String [] displayContents;
+    private short breakPoint;
 
     //Accessors
 
@@ -78,6 +79,22 @@ public class VM252DebuggerModel extends SimpleObservable
     {
         displayContents = other;
         announceChange();
+    }
+
+    public void resetDisplayContents()
+    {
+        String [] contents = {""};
+        displayContents = contents;
+    }
+
+    public short getBreakPoint()
+    {
+        return breakPoint;
+    }
+
+    public void setBreakPoint(short other)
+    {
+        breakPoint = other;
     }
 
     // Ctors

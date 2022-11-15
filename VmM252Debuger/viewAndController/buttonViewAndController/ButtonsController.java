@@ -95,7 +95,7 @@ public class ButtonsController extends JPanel
 
         // Quit button functionality
         // Closes the program upon clicking on the button
-        ActionListener quitActListener = new ActionListener() {
+        ActionListener quitListener = new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 // close the current JFrame
@@ -103,9 +103,33 @@ public class ButtonsController extends JPanel
             }
         };
 
-        Cmd_q.addActionListener(quitActListener);
+        Cmd_q.addActionListener(quitListener);  
 
-        
+        RunButtonActionListener runListener = new RunButtonActionListener();
+        Cmd_r.addActionListener(runListener);
+
+        //
+        // Add action listener for n command button
+        //
+
+        RunStepListener runStepListener = new RunStepListener();
+        Cmd_n.addActionListener(runStepListener);
+
+        //
+        // Add action listener for increase speed and decrease speed command
+        //
+
+        ChangeSpeedListener changeSpeedListener = new ChangeSpeedListener();
+        instructionIncrease.addActionListener(changeSpeedListener);
+        instructionDecrease.addActionListener(changeSpeedListener);
+
+        //
+        // Add action listener for stop and resume command
+        //
+
+        ChangeRunningStatus changeRunningStatus = new ChangeRunningStatus();
+        stop.addActionListener(changeRunningStatus);
+        resume.addActionListener(changeRunningStatus);
             
         // Add the buttons to the toolbar
 
