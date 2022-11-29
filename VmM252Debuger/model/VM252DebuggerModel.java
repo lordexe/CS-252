@@ -9,6 +9,7 @@ public class VM252DebuggerModel extends SimpleObservable
     private String instruction;
     private String [] displayContents;
     private short breakPoint;
+    private boolean HaltingInstruction;
 
     //Accessors
 
@@ -97,6 +98,16 @@ public class VM252DebuggerModel extends SimpleObservable
         breakPoint = other;
     }
 
+    public boolean getHaltStatus()
+    {
+        return HaltingInstruction;
+    }
+
+    public void setHalt(boolean other)
+    {
+       HaltingInstruction = other;
+    }
+
     // Ctors
 
     public VM252DebuggerModel()
@@ -111,7 +122,7 @@ public class VM252DebuggerModel extends SimpleObservable
         setInstruction("Null");
         setDisplayContents(welcomeContents);
 
-        }
+    }
 
         VM252DebuggerModel(int initialAccValue, int initialPCValue, int initialMemoryValue, String initialInstruction, String [] initialDisplayContents)
     {
@@ -124,5 +135,9 @@ public class VM252DebuggerModel extends SimpleObservable
         setInstruction(initialInstruction);
         setDisplayContents(initialDisplayContents);
 
-        }
+    }
+
+    
+
+
 }

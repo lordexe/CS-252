@@ -160,4 +160,63 @@ public class ButtonsController extends JPanel
 
         add(getPanel());
     }
+
+    private class RunButtonActionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            ExecutionThread runThread = new ExecutionThread();
+            runThread.start();
+        }
+    }
+
+    private class ExecutionThread extends Thread{
+        @Override
+        public void run()
+        {
+            //
+            // execute obj file in another thread
+            //
+            boolean hitBreakPoint = false;
+            if(getModel().getHaltStatus())
+            {
+                getModel().setDisplayContents(new String [] {"Program stopped"});
+            }else
+            {
+                while(!getModel().getHaltStatus() && !hitBreakPoint)
+                {
+                    if(getModel().getPauseStatus())
+                        ; // do nothing
+                else if (getModel().getBreakPoint() == getModel().getPCValue())
+                    {
+                        getModel().runProgram();
+                        getModel().setDisplayContents(new String [] {"Hit breakpoint at address " + getModel().getBreakPoint() });
+                        hitBreakPoint = true;
+                    }else
+                        getModel().runProgram();
+
+                    try{
+                        Thread.sleep(getModel().getExecutingSpeed());
+                    }catch(Exception e){}
+                }
+            }
+        }
+    }
+
+    private class StepExecutionThread extends Thread{
+        @Override
+        public void run()
+        {
+            //
+            // execute obj file in another thread
+            //
+            if(getModel().getHaltStatus())
+            {
+                getModel().setDisplayContents(new String [] {"Program stopped"});
+            }else
+            {
+                getModel().runProgram();
+            }
+        }
+    }
 }
