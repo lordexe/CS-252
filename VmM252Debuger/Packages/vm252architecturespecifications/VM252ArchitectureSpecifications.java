@@ -595,7 +595,8 @@ public class VM252ArchitectureSpecifications
                         }
 
                     }
-
+// this part below are important
+// chi can cho instruction byte vao de get va traverse to other data type
                 public Instruction(byte [] instructionBytes) // use this one to declare code 
                     throws IllegalArgumentException
                 {

@@ -44,7 +44,7 @@ public class VM252Stepper
             return myMachineOutputStream;
 
             }
-
+// lay phan nay trong phan VM252Stepper de fetch thang lon opcode
         private byte [ ] fetchMemoryBytes(int memoryAddress, int numberOfBytes)
         {
 
