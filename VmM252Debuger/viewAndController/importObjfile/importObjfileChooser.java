@@ -14,32 +14,38 @@ public class importObjfileChooser extends JFileChooser{
 
     public void importObjfileChooser() {
 
-        // Create file chooser from JFilechooser
-        JFileChooser fileChooser = new JFileChooser(FileSystemView.getFileSystemView().getHomeDirectory());
+        // Create a new File chooser from JFileChooser()
+        JFileChooser fileChooser = new JFileChooser();
 
-        // set filter for Object file " *.vm252obj "
-        FileNameExtensionFilter filter = new FileNameExtensionFilter("vm252Obj Files", "vm252obj");
+        // Adding filter to the file chooser
+        // to only allow choices of files of type vm252 obj
+        FileNameExtensionFilter filter = new FileNameExtensionFilter("ObjectFilesFOrTesting", "vm252obj");
         fileChooser.setFileFilter(filter);
 
-        int returnValue = fileChooser.showOpenDialog(null);
+        // Specify the location to be the current directory for the file chooser search
+        fileChooser.setCurrentDirectory(new File("./vm252obj_examples"));
 
-        if (returnValue == JFileChooser.APPROVE_OPTION){
-            File selectedFile = fileChooser.getSelectedFile();
+        // assign the result from file choices to response
+        // it is int because it will be 0 if a file was chosen
+        // it will be 1 if no file was choosen, and user clicked x or cancel
+        int response = fileChooser.showOpenDialog(null);
 
-            // use selected directory for VM252Ulitites
-            String filePath = selectedFile.getPath();
-            System.out.println(filePath);
-
-            // 
-
-            byte [] objPrograme = VM252Utilities.readObjectCodeFromObjectFile(filePath);
-
-
-            // send the Prgrame byte [] to 
-            ProgramFrame frame = new ProgramFrame(objPrograme);
+        // if there was a file chosen to open,
+        // get the file name from file chooser
+        // get the object code from the choosen file
+        // then feed that into the program
+        if(response == JFileChooser.APPROVE_OPTION) {
+            String file = fileChooser.getSelectedFile().getPath();
+            byte [] program = VM252Utilities.readObjectCodeFromObjectFile(file);
+            ProgramFrame frame = new ProgramFrame(program);
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);
+        }
+        // if no file was choosen
+        // exit the program
+        else{
+            System.exit(0);
         }
     }
 }

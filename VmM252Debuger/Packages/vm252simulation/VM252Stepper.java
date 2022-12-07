@@ -91,7 +91,7 @@ public class VM252Stepper
     //
     //  Public Ctor
     //
-
+// eddit cái này để có chỉnh construction dựa cái model của team
         public VM252Stepper(
                 VM252Model machineState,
                 Scanner machineInputStream,

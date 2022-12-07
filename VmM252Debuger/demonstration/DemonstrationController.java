@@ -104,17 +104,18 @@ public class DemonstrationController
         // Returns:
         //     none
         //
-
+// use this part
         public void loadAndRun(
             String objectFileName,
-            Scanner machineInputStream,
-            PrintStream machineOutputStream
+            Scanner machineInputStream,// input Gui 
+            PrintStream machineOutputStream // ???  out put we want to get form it
             ) throws IOException
         {
 
             byte [ ] objectCode
                 = VM252Utilities.readObjectCodeFromObjectFile(objectFileName);
 
+            // below
             if (objectCode != null) {
 
                 setMachineStepper(

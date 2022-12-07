@@ -1,11 +1,12 @@
 package model;
 import observation.*;
+import Packages.vm252architecturespecifications.*;
 public class VM252DebuggerModel extends SimpleObservable
 {
 
     private int myACC;
     private int myPC;
-    private int myMemory;
+    private byte [] myMemory;
     private String instruction;
     private String [] displayContents;
     private short breakPoint;
@@ -27,7 +28,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
         }
 
-    public int getMemoryValue()
+    public byte[] getMemoryValue()
     {
 
         return myMemory;
@@ -45,7 +46,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
     //Murators
 
-    public void setAccValue(int other)
+    public void setACCValue(int other)
     {
 
         myACC = other;
@@ -63,7 +64,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
         }
 
-    public void setMemoryValue(int other)
+    public void setMemoryValue(byte [] other)
     {
 
         myMemory = other;
@@ -116,26 +117,31 @@ public class VM252DebuggerModel extends SimpleObservable
         super();
         String [] welcomeContents = {"Welcome to VM252 debugger GUI"};
 
-        setAccValue(0);
-        setPCValue(0);
-        setMemoryValue(0);
+
+        setACCValue((short) 0);
+        setPCValue((short) 0);
+        setMemoryValue(new byte [8192]);
         setInstruction("Null");
         setDisplayContents(welcomeContents);
 
     }
 
-        VM252DebuggerModel(int initialAccValue, int initialPCValue, int initialMemoryValue, String initialInstruction, String [] initialDisplayContents)
+        VM252DebuggerModel(byte [] programEncoded)
     {
 
         super();
+        byte [] memory = new byte[ 8192 ];
+        String [] welcomeContents = {""};
 
-        setAccValue(initialAccValue);
-        setPCValue(initialPCValue);
+        setACCValue((short)0);
+        setPCValue((short) 0);
         setMemoryValue(initialMemoryValue);
         setInstruction(initialInstruction);
         setDisplayContents(initialDisplayContents);
 
     }
+    
+    public void runPrograme ()
 
     
 
