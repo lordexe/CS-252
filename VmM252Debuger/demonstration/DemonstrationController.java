@@ -107,7 +107,7 @@ public class DemonstrationController
 // use this part
         public void loadAndRun(
             String objectFileName,
-            Scanner machineInputStream,// input Gui 
+            Scanner machineInputStream, // pointer for the looping it 
             PrintStream machineOutputStream // ???  out put we want to get form it
             ) throws IOException
         {

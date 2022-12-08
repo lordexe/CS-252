@@ -1,39 +1,55 @@
 package model;
 import observation.*;
-import Packages.vm252architecturespecifications.*;
-public class VM252DebuggerModel extends SimpleObservable
+import vm252architecturespecifications.VM252ArchitectureSpecifications;
+import Packages.vm252simulation.ObservableVM252;
+import Packages.vm252simulation.VM252Observer;
+public class VM252DebuggerModel extends SimpleObservable implements ObservableVM252
 {
+    public enum StoppedCategory {
+        notStopped,
+        stopped
+        };
+    
+    private int myAccumulator;
+    private int myProgramCounter;
+    private final byte [ ] myMemory
+        = new byte [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
+    private StoppedCategory myStoppedStatus;
 
-    private int myACC;
-    private int myPC;
-    private byte [] myMemory;
     private String instruction;
-    private String [] displayContents;
+    private String [] displayContents 
+        = new String [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
     private short breakPoint;
     private boolean HaltingInstruction;
 
     //Accessors
 
-    public int getAccValue()
-    {
+    public int accumulator(){
+        return myAccumulator;
+    }
 
-        return myACC;
+    public int programCounter(){
+        return myProgramCounter;
+    }
 
-        }
-
-    public int getPCValue()
-    {
-
-        return myPC;
-
-        }
-
-    public byte[] getMemoryValue()
-    {
-
+    public byte[] getMemoryValue(){
         return myMemory;
+    }
 
+    public byte memoryByte(int address) throws IllegalArgumentException{
+        if (address < 0
+            || VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES <= address)
+            throw
+            new IllegalArgumentException(
+                "Attempt to getch memory byte from illegal memory address " + address
+            );
+        else
+            return myMemory[ address ];
         }
+
+    public StoppedCategory stoppedStatus(){
+        return myStoppedStatus;
+    }
     
     public String getInstruction(){
         return instruction;
@@ -46,35 +62,46 @@ public class VM252DebuggerModel extends SimpleObservable
 
     //Murators
 
-    public void setACCValue(int other)
-    {
+    public void setAccumulator(int other){
+        myAccumulator = ((short) other);
+        announceAccumulatorChange();
+    }
 
-        myACC = other;
+    public void setProgramCounter(int other) throws IllegalArgumentException{
+        if (other < 0 || VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES <= other)
+            throw
+                new IllegalArgumentException(
+                    "Attempt to set program counter to illegal memory address " + other
+                );
 
-        announceChange();
+        else {
+            myProgramCounter = other;
+            announceProgramCounterChange();
+            };
 
         }
 
-    public void setPCValue(int other)
-    {
-
-        myPC = other;
-
-        announceChange();
-
+    public void setMemoryByte(int address, byte other) throws IllegalArgumentException{
+        if (address < 0
+                || VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES <= address)
+            throw
+                new IllegalArgumentException(
+                    "Attempt to set memory byte at illegal memory address " + address
+                    );
+        else {
+            myMemory[ address ] = other;
+            announceMemoryChange(address);
+            }
         }
 
-    public void setMemoryValue(byte [] other)
-    {
-
-        myMemory = other;
-
-        announceChange();
-
+    public void setStoppedStatus(StoppedCategory other){
+        myStoppedStatus = other;
+        announceStoppedStatusChange();
         }
     
     public void setInstruction(String other) {
         instruction = other;
+        announceChange();
     }
 
     public void setDisplayContents(String [] other)
@@ -108,42 +135,52 @@ public class VM252DebuggerModel extends SimpleObservable
     {
        HaltingInstruction = other;
     }
-
     // Ctors
-
-    public VM252DebuggerModel()
-    {
+    VM252DebuggerModel(byte [] programEncoded){
 
         super();
-        String [] welcomeContents = {"Welcome to VM252 debugger GUI"};
-
-
-        setACCValue((short) 0);
-        setPCValue((short) 0);
-        setMemoryValue(new byte [8192]);
-        setInstruction("Null");
-        setDisplayContents(welcomeContents);
-
-    }
-
-        VM252DebuggerModel(byte [] programEncoded)
-    {
-
-        super();
-        byte [] memory = new byte[ 8192 ];
         String [] welcomeContents = {""};
 
-        setACCValue((short)0);
-        setPCValue((short) 0);
-        setMemoryValue(initialMemoryValue);
-        setInstruction(initialInstruction);
-        setDisplayContents(initialDisplayContents);
+        setAccumulator(0);
+        setProgramCounter(0);
+        setStoppedStatus(StoppedCategory.notStopped);
+        // setMemoryValue();
+        // setInstruction();
+        // setDisplayContents();
 
     }
-    
-    public void runPrograme ()
 
-    
+    @Override
+    public void announceAccumulatorChange() {
+        // TODO Auto-generated method stub
+        for (Observer currentObserver : observers())
 
+                if (currentObserver instanceof VM252Observer)
+                    ((VM252Observer) currentObserver).updateAccumulator();
 
+            }
+
+    @Override
+    public void announceProgramCounterChange() {
+        // TODO Auto-generated method stub
+        for (Observer currentObserver : observers())
+            if (currentObserver instanceof VM252Observer)
+                ((VM252Observer) currentObserver).updateProgramCounter();
+            }
+
+    @Override
+    public void announceMemoryChange(int addressOfChangedByte) {
+        // TODO Auto-generated method stub
+        for (Observer currentObserver : observers())
+            if (currentObserver instanceof VM252Observer)
+                ((VM252Observer) currentObserver).updateMemory(addressOfChangedByte);
+            }
+
+    @Override
+    public void announceStoppedStatusChange() {
+        // TODO Auto-generated method stub
+        for (Observer currentObserver : observers())
+            if (currentObserver instanceof VM252Observer)
+                ((VM252Observer) currentObserver).updateStoppedStatus();
+            }
 }

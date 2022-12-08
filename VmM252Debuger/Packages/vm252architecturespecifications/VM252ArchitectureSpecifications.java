@@ -160,7 +160,11 @@ public class VM252ArchitectureSpecifications
                 private int myNumericOpcode;
                 private int myNumericOperand;
                 private String  mySymbolicOpcode;
-                private byte [] myInstructionBytes;
+                private static byte [] myInstructionBytes;
+
+                public String getCLALAN() {
+                    return mySymbolicOpcode;
+                }
 
                 private static HashMap<String, InstructionInfo>
                     symbolicOpcodeToInstructionInfoMap
@@ -814,27 +818,178 @@ public class VM252ArchitectureSpecifications
             // Private Mutators
             //
 
-                private void setNumericOperand(int other)
+                public void setNumericOperand(int other)
                 {
 
                     myNumericOperand = other;
 
                     }
 
-                private void setSymbolicOpcode(String other)
+                public void setSymbolicOpcode(String other)
                 {
 
                     mySymbolicOpcode = other.toUpperCase();
 
                     }
 
-                private void setInstructionBytes(byte [] other)
+                public static void setInstructionBytes(byte [] other)
                 {
 
                     myInstructionBytes = other;
 
                     }
 
+                // public static byte[] Instruction(byte[] programEncoded) {
+                //     return null;
+                // }
+
             }
 
+        public static byte [] fetchBytePair(byte [] memory, short address)
+        {
+
+            byte [] bytePair = { memory[ address ], memory[ nextMemoryAddress(address) ] };
+
+            return bytePair;
+
+            }
+
+
+        public static int [] decodedInstructionComponents(byte [] instructionBytes)
+            {
+    
+                //
+                // If instruction bytes is not a valid binary encoding of a VM252 instruction,
+                //     return a null array
+                //
+    
+                    if (instructionBytes == null || instructionBytes.length > 2)
+    
+                        return null;
+    
+                //
+                // Otherwise, return an array holding the opcode and (for some opcodes) operand
+                //    from the encoded instruction
+                //
+    
+                    else {
+    
+                        int [] instructionComponents = null;
+    
+                        switch (instructionBytes[ 0 ] >> 5 & 0x7) {
+    
+                            //
+                            // If the 3 most-significant bits of the byte holding the encoded
+                            // opcode denote an instruction having a 3-bit opcode and a 13-bit
+                            // unsigned integer operand, return an array holding those two values
+                            //
+    
+                                case LOAD_OPCODE :
+                                case STORE_OPCODE :
+                                case ADD_OPCODE :
+                                case SUBTRACT_OPCODE :
+                                case JUMP_OPCODE :
+                                case JUMP_ON_ZERO_OPCODE :
+                                case JUMP_ON_POSITIVE_OPCODE : {
+    
+                                    if (instructionBytes.length == 2) {
+    
+                                        instructionComponents = new int [ 2 ];
+    
+                                        //
+                                        // Let instructionComponents[ 0 ]
+                                        //     = the 3 most-significant bits of
+                                        //         instructionBytes[ 0 ]
+                                        // Let instructionComponents[ 1 ]
+                                        //     = the 5 least-significant bits of
+                                        //         instructionBytes[ 0 ] concatenated with
+                                        //         instructionBytes[ 1 ]
+    
+    
+                                            instructionComponents[ 0 ]
+                                                = instructionBytes[ 0 ] >> 5 & 0x7;
+                                            instructionComponents[ 1 ]
+                                                = instructionBytes[ 0 ] << 8 & 0x1f00
+                                                    | instructionBytes[ 1 ] & 0xff;
+    
+                                        }
+    
+                                    break;
+    
+                                    }
+    
+                            default :
+    
+                                switch (instructionBytes[ 0 ] >> 4 & 0xf) {
+    
+                                    //
+                                    // If the 4 most-significant bits of the byte holding the
+                                    // encoded opcode denote an instruction having a 4-bit opcode
+                                    // and a 12-bit signed integer operand, return an array
+                                    // holding those two values
+                                    //
+    
+                                        case SET_OPCODE : {
+    
+                                            if (instructionBytes.length == 2) {
+    
+                                                instructionComponents = new int [ 2 ];
+    
+                                                //
+                                                // Let instructionComponents[ 0 ]
+                                                //     = the 4 most-significant bits of
+                                                //         instructionBytes[ 0 ]
+                                                // Let instructionComponents[ 1 ]
+                                                //     = the 4 least-significant bits of
+                                                //         instructionBytes[ 0 ] concatenated
+                                                //         with instructionBytes[ 1 ]
+    
+    
+                                                    instructionComponents[ 0 ]
+                                                        = instructionBytes[ 0 ] >> 4 & 0xf;
+                                                    instructionComponents[ 1 ]
+                                                        = instructionBytes[ 0 ] << 28 >> 20
+                                                            | instructionBytes[ 1 ] & 0xff;
+    
+                                                }
+    
+                                            break;
+    
+                                        }
+    
+                                    //
+                                    // Otherwise, the 6 most-significant bits of the byte holding
+                                    // the encoded necessarily opcode denote an instruction
+                                    // having a 6-bit opcode and no operand, so return an array
+                                    // holding the opcode only
+                                    //
+    
+                                        default : {
+    
+                                            instructionComponents = new int [ 1 ];
+    
+                                            instructionComponents[ 0 ]
+                                                = instructionBytes[ 0 ] >> 2 & 0x3f;
+    
+                                            }
+    
+                                    }
+    
+                            }
+    
+                    return instructionComponents;
+    
+                    }
+    
+                }
+
+
+        public static byte[] storeIntegerValue(byte[] memoryValue, short operand, short accValue) {
+            return null;
+        }
+
+
+		public static short fetchIntegerValue(byte[] memoryValue, short operand) {
+			return 0;
+		}
     }

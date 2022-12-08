@@ -5,8 +5,7 @@ import java.io.IOException;
 import java.util.Scanner;
 
 
-import vm252simulation.VM252Model;
-import vm252simulation.VM252View;
+import vm252simulation.*;
 
 
 class AccumulatorPrinter extends VM252View

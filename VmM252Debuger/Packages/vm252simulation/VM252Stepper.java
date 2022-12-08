@@ -4,11 +4,13 @@ package Packages.vm252simulation;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Scanner;
+import java.lang.Math;
+
 
 import Packages.vm252architecturespecifications.VM252ArchitectureSpecifications;
 import Packages.vm252architecturespecifications.VM252ArchitectureSpecifications.Instruction;
+import model.VM252DebuggerModel;
 
-import java.lang.Math;
 public class VM252Stepper
 {
 
@@ -16,7 +18,7 @@ public class VM252Stepper
     // Private Fields
     //
 
-        private VM252Model myMachineState;
+        private VM252DebuggerModel myMachineState;
         private Scanner myMachineInputStream;
         private PrintStream myMachineOutputStream;
 
@@ -24,7 +26,7 @@ public class VM252Stepper
     // Public Accessors
     //
 
-        public VM252Model machineState()
+        public VM252DebuggerModel machineState()
         {
 
             return myMachineState;
@@ -44,7 +46,7 @@ public class VM252Stepper
             return myMachineOutputStream;
 
             }
-// lay phan nay trong phan VM252Stepper de fetch thang lon opcode
+
         private byte [ ] fetchMemoryBytes(int memoryAddress, int numberOfBytes)
         {
 
@@ -91,15 +93,15 @@ public class VM252Stepper
     //
     //  Public Ctor
     //
-// eddit cái này để có chỉnh construction dựa cái model của team
+
         public VM252Stepper(
-                VM252Model machineState,
+                VM252DebuggerModel VM252DebuggerModel,
                 Scanner machineInputStream,
                 PrintStream machineOutputStream
                 )
         {
 
-            myMachineState = machineState;
+            myMachineState = VM252DebuggerModel;
             myMachineInputStream = machineInputStream;
             myMachineOutputStream = machineOutputStream;
 
@@ -134,7 +136,7 @@ public class VM252Stepper
         public void step() throws IOException
         {
 
-            if (machineState().stoppedStatus() != VM252Model.StoppedCategory.stopped) {
+            if (machineState().stoppedStatus() != VM252DebuggerModel.StoppedCategory.stopped) {
 
                 Instruction currentInstruction;
                 int data;
@@ -275,7 +277,7 @@ public class VM252Stepper
 
                         case VM252ArchitectureSpecifications.STOP_OPCODE :
                             machineState().setStoppedStatus(
-                                VM252Model.StoppedCategory.stopped
+                                VM252DebuggerModel.StoppedCategory.stopped
                                 );
                             suppressProgramCounterIncrement = true;
                             break;

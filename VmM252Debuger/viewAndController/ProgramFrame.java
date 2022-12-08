@@ -36,7 +36,7 @@ public class ProgramFrame extends JFrame{
         
         // Create Model Object 
     
-        VM252DebuggerModel machine = new VM252DebuggerModel();
+        VM252DebuggerModel machine = new VM252DebuggerModel(objProgram);
 
         // create text FieldView pannel
 
