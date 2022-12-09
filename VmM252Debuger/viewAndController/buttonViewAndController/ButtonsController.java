@@ -187,7 +187,7 @@ public class ButtonsController extends JPanel
                 {
                     if(getModel().getPauseStatus())
                         ; // do nothing
-                else if (getModel().getBreakPoint() == getModel().getPCValue())
+                else if (getModel().getBreakPoint() == getModel().programCounter())
                     {
                         getModel().runProgram();
                         getModel().setDisplayContents(new String [] {"Hit breakpoint at address " + getModel().getBreakPoint() });
