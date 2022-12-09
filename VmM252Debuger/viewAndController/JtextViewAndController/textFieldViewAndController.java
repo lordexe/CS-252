@@ -106,9 +106,9 @@ public class textFieldViewAndController extends JPanel implements Observer
 
         // Creating text fields
 
-        setACCTextFieldValue(new JTextField("" + getTextBox().getAccValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setACCTextFieldValue(new JTextField("" + getTextBox().accumulator(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setPCTextFieldValue(new JTextField("" + getTextBox().getPCValue(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        setPCTextFieldValue(new JTextField("" + getTextBox().programCounter(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
         setInstructionTextFieldValue(new JTextField("" + getTextBox().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
@@ -159,8 +159,8 @@ public class textFieldViewAndController extends JPanel implements Observer
     {
         //set text fields to display the updated information
 
-        getACCTextField().setText("" + getTextBox().getAccValue());
-        getPCTextField().setText("" + getTextBox().getPCValue());
+        getACCTextField().setText("" + getTextBox().accumulator());
+        getPCTextField().setText("" + getTextBox().programCounter());
         getInstructionTextField().setText("" + getTextBox().getInstruction());
         getMemoryTextField().setText("" + getTextBox().getMemoryValue());
     }
@@ -189,18 +189,18 @@ public class textFieldViewAndController extends JPanel implements Observer
 
                 Scanner MemoryValueScanner = new Scanner(getMemoryTextField().getText());
 
-                int ACCValue = ACCValueScanner.hasNextInt()? ACCValueScanner.nextInt():0;
+                int ACCValue = ACCValueScanner.hasNextInt() ? ACCValueScanner.nextInt():0;
 
                 int PCValue = PCValueScanner.hasNextInt() ? PCValueScanner.nextInt(): 0;
 
                 String InstructionValue = InstructionValueScanner.next();
 
-                int MemoryValue = MemoryValueScanner.hasNextInt() ? MemoryValueScanner.nextInt(): 0;
+                byte MemoryValue = MemoryValueScanner.hasNextByte() ? MemoryValueScanner.nextByte(): 0;
 
-                getTextBox().setAccValue(ACCValue);
-                getTextBox().setPCValue(PCValue);
+                getTextBox().setAccumulator(ACCValue);
+                getTextBox().setProgramCounter(PCValue);
                 getTextBox().setInstruction(InstructionValue);
-                getTextBox().setMemoryValue(MemoryValue);
+                getTextBox().setMemoryByte(0, MemoryValue);
 
 
             }
