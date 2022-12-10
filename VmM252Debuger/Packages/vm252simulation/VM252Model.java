@@ -13,12 +13,12 @@ public class VM252Model extends SimpleObservable implements ObservableVM252
         notStopped,
         stopped
         };
-
     private int myAccumulator;
     private int myProgramCounter;
     private final byte [ ] myMemory
         = new byte [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
     private StoppedCategory myStoppedStatus;
+    
 
     //
     // Public Accessors
@@ -183,7 +183,6 @@ public class VM252Model extends SimpleObservable implements ObservableVM252
 
                 if (currentObserver instanceof VM252Observer)
                     ((VM252Observer) currentObserver).updateStoppedStatus();
-
             }
 
     }

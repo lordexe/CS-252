@@ -16,6 +16,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
         = new byte [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
     private StoppedCategory myStoppedStatus;
 
+
     private String instruction;
     private String [] displayContents 
         = new String [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
@@ -158,7 +159,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
                 if (currentObserver instanceof VM252Observer)
                     ((VM252Observer) currentObserver).updateAccumulator();
 
-            }
+        }
 
     @Override
     public void announceProgramCounterChange() {

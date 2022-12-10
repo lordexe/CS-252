@@ -4,7 +4,7 @@ package Packages.vm252simulation;
 import observation.Observable;
 
 
-interface ObservableVM252 extends Observable
+public interface ObservableVM252 extends Observable
 {
 
     void announceAccumulatorChange();
