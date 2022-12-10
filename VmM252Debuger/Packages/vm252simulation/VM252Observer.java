@@ -29,5 +29,4 @@ public interface VM252Observer extends Observer
         // Tell this object that the subject it's observing's stopped status
         // has changed
         //
-
     }

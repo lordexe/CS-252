@@ -1,6 +1,7 @@
 import java.awt.*;
 import java.awt.event.*;
 import javax.swing.*;
+import viewAndController.*;
 
 import viewAndController.importObjfile.importObjfileChooser;
 public class Main{

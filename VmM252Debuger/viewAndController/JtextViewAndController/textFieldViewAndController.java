@@ -13,7 +13,7 @@ public class textFieldViewAndController extends JPanel implements Observer
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;
     private static final int OUR_COMPONENT_FIELD_AND_AREA_WIDTH = 5;
-    private static final int OUR_MEMORY_FIELD_AND_AREA_WIDTH = 50;
+    private static final int OUR_INPUT_FIELD_AND_AREA_WIDTH = 50;
 
 
     private JPanel myJPanel;
@@ -21,7 +21,7 @@ public class textFieldViewAndController extends JPanel implements Observer
     private JTextField myACCTextField;
     private JTextField myPCTextField;
     private JTextField myInstructionTextField;
-    private JTextField myMemoryTextField;
+    private JTextField myInputTextField;
 
     // Accessors
 
@@ -43,9 +43,9 @@ public class textFieldViewAndController extends JPanel implements Observer
     {
         return myInstructionTextField;
     }
-    private JTextField getMemoryTextField()
+    private JTextField getInputTextField()
     {
-        return myMemoryTextField;
+        return myInputTextField;
     }
     private VM252DebuggerModel getTextBox()
     {
@@ -74,9 +74,9 @@ public class textFieldViewAndController extends JPanel implements Observer
         myInstructionTextField = other;
     }
 
-    private void setMemoryTextFieldValue(JTextField other)
+    private void setInputTextFieldValue(JTextField other)
     {
-        myMemoryTextField = other;
+        myInputTextField = other;
     }
 
     private void setTextBox(VM252DebuggerModel other)
@@ -112,14 +112,14 @@ public class textFieldViewAndController extends JPanel implements Observer
 
         setInstructionTextFieldValue(new JTextField("" + getTextBox().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
 
-        setMemoryTextFieldValue(new JTextField("" + getTextBox().getMemoryValue(), OUR_MEMORY_FIELD_AND_AREA_WIDTH));
+        setInputTextFieldValue(new JTextField("", OUR_INPUT_FIELD_AND_AREA_WIDTH));
 
         //Creating labels
 
         JLabel ACCLabel = new JLabel("ACC:", JLabel.RIGHT);
         JLabel PCLabel = new JLabel("PC:", JLabel.RIGHT);
         JLabel InstructionLabel = new JLabel("Instruction:", JLabel.RIGHT);
-        JLabel MemoryLabel = new JLabel("Memory:", JLabel.RIGHT);
+        JLabel InputLabel = new JLabel("Input:", JLabel.RIGHT);
 
         //Create panels
 
@@ -134,8 +134,9 @@ public class textFieldViewAndController extends JPanel implements Observer
         getPanel().add(getPCTextField());
         getPanel().add(InstructionLabel);
         getPanel().add(getInstructionTextField());
-        getPanel().add(MemoryLabel);
-        getPanel().add(getMemoryTextField());
+        getInstructionTextField().setEditable(false);
+        getPanel().add(InputLabel);
+        getPanel().add(getInputTextField());
 
         //add panel to container
 
@@ -150,7 +151,7 @@ public class textFieldViewAndController extends JPanel implements Observer
         getACCTextField().addActionListener(inputAction);
         getPCTextField().addActionListener(inputAction);
         getInstructionTextField().addActionListener(inputAction);
-        getMemoryTextField().addActionListener(inputAction);
+        getInputTextField().addActionListener(inputAction);
     }
 
     //Observation Method
@@ -162,7 +163,7 @@ public class textFieldViewAndController extends JPanel implements Observer
         getACCTextField().setText("" + getTextBox().accumulator());
         getPCTextField().setText("" + getTextBox().programCounter());
         getInstructionTextField().setText("" + getTextBox().getInstruction());
-        getMemoryTextField().setText("" + getTextBox().getMemoryValue());
+        getInputTextField().setText("" + getTextBox());
     }
 
     private class commandInputAction implements ActionListener
@@ -187,7 +188,7 @@ public class textFieldViewAndController extends JPanel implements Observer
 
                 Scanner InstructionValueScanner = new Scanner(getInstructionTextField().getText());
 
-                Scanner MemoryValueScanner = new Scanner(getMemoryTextField().getText());
+                Scanner InputValueScanner = new Scanner(getInputTextField().getText());
 
                 int ACCValue = ACCValueScanner.hasNextInt() ? ACCValueScanner.nextInt():0;
 
@@ -195,15 +196,33 @@ public class textFieldViewAndController extends JPanel implements Observer
 
                 String InstructionValue = InstructionValueScanner.next();
 
-                byte MemoryValue = MemoryValueScanner.hasNextByte() ? MemoryValueScanner.nextByte(): 0;
+                int InputValue = InputValueScanner.hasNextByte() ? InputValueScanner.nextInt(): 0;
 
                 getTextBox().setAccumulator(ACCValue);
                 getTextBox().setProgramCounter(PCValue);
                 getTextBox().setInstruction(InstructionValue);
-                getTextBox().setMemoryByte(0, MemoryValue);
+                getTextBox().setAccumulator(InputValue);
 
 
             }
         }
+    }
+
+    @Override
+    public void attach(Observer anotherObserver) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void detach(Observer currentObserver) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void announceChange() {
+        // TODO Auto-generated method stub
+        
     }
 }

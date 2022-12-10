@@ -202,21 +202,4 @@ public class ButtonsController extends JPanel
             }
         }
     }
-
-    private class StepExecutionThread extends Thread{
-        @Override
-        public void run()
-        {
-            //
-            // execute obj file in another thread
-            //
-            if(getModel().getHaltStatus())
-            {
-                getModel().setDisplayContents(new String [] {"Program stopped"});
-            }else
-            {
-                getModel().runProgram();
-            }
-        }
-    }
 }

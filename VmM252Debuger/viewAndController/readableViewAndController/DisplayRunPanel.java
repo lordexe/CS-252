@@ -118,6 +118,38 @@ public class DisplayRunPanel extends JPanel implements Observer
     @Override
     public void update() {
         // TODO Auto-generated method stub
+        if(!(getSubject().getDisplayContents().length == 1 && getSubject().getDisplayContents()[0] == ""))
+        {
+            String displayString = "";
+
+            for (String content : getSubject().getDisplayContents())
+            {
+                displayString = displayString + content + "\n";
+            }
+
+            getDisplayBox().append(displayString);
+            getDisplayBox().setCaretPosition(getDisplayBox().getDocument().getLength());
+
+
+        }
+        
+    }
+
+    @Override
+    public void attach(Observer anotherObserver) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void detach(Observer currentObserver) {
+        // TODO Auto-generated method stub
+        
+    }
+
+    @Override
+    public void announceChange() {
+        // TODO Auto-generated method stub
         
     }
 }

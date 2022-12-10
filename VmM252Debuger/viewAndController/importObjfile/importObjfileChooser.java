@@ -23,7 +23,7 @@ public class importObjfileChooser extends JFileChooser{
         fileChooser.setFileFilter(filter);
 
         // Specify the location to be the current directory for the file chooser search
-        fileChooser.setCurrentDirectory(new File("./vm252obj_examples"));
+        fileChooser.setCurrentDirectory(new File("./ObjectFilesFOrTesting"));
 
         // assign the result from file choices to response
         // it is int because it will be 0 if a file was chosen

@@ -29,4 +29,5 @@ public interface ObservableVM252 extends Observable
         // has changed
         //
 
+    void announceChange();
     }

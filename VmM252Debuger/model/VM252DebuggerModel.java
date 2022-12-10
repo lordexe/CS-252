@@ -15,6 +15,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
     private final byte [ ] myMemory
         = new byte [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
     private StoppedCategory myStoppedStatus;
+    private boolean myPauseStatus;
 
 
     private String instruction;
@@ -50,6 +51,11 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
     public StoppedCategory stoppedStatus(){
         return myStoppedStatus;
+    }
+
+    public boolean getPauseStatus()
+    {
+        return myPauseStatus;
     }
     
     public String getInstruction(){
@@ -137,7 +143,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
        HaltingInstruction = other;
     }
     // Ctors
-    VM252DebuggerModel(byte [] programEncoded){
+    public VM252DebuggerModel(byte [] programEncoded){
 
         super();
         String [] welcomeContents = {""};
@@ -184,4 +190,12 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
             if (currentObserver instanceof VM252Observer)
                 ((VM252Observer) currentObserver).updateStoppedStatus();
             }
-}
+
+    @Override
+    public void announceChange() {
+
+        for (Observer currentObserver : observers())
+            currentObserver.update();
+
+        }
+    }
