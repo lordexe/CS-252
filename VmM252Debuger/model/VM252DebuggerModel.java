@@ -206,7 +206,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
         return nextInst;
     }
 
-    public void setParsedInstructions()
+    public String convertToString()
     {
         Instruction currInstruction;
         String all_string = "";
@@ -275,17 +275,20 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
                 }
 
-                if (! suppressProgramCounterIncrement)
-                    currentPC = 
-                        VM252ArchitectureSpecifications.nextMemoryAddress(
-                            programCounter(),
-                            currentInstruction.instructionBytes().length
-                            )
-                        ;
+        if (! suppressProgramCounterIncrement)
+            currentPC = 
+                VM252ArchitectureSpecifications.nextMemoryAddress(
+                    programCounter(),
+                    currentInstruction.instructionBytes().length
+                    )
+                ;
 
-                }
-            objFileString = all_string;
+        }
+        return all_string;
         }            
+    public void  setParsedInstructions(String other){
+        objFileString = other;
+    }
 
     public String getParsedInstructions()
     {
@@ -342,7 +345,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
         setBreakPoint((short)8192);
         setCurrentInstruction();
         setNextInst(getCurrentInstruction().symbolicOpcode());
-        setParsedInstructions();
+        setParsedInstructions(convertToString());
     }
 
     public VM252DebuggerModel(byte [] programEncoded){
@@ -365,7 +368,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
         setBreakPoint((short)8192);
         setCurrentInstruction();
         setNextInst(getCurrentInstruction().symbolicOpcode());
-        setParsedInstructions();
+        setParsedInstructions(convertToString());
         System.out.println(accumulator());
         System.out.println(programCounter());
         System.out.println(getNextInst());
