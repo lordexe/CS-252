@@ -275,15 +275,19 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
                 }
 
+            System.out.println("Inside of the Loop");
+
         if (! suppressProgramCounterIncrement)
             currentPC = 
                 VM252ArchitectureSpecifications.nextMemoryAddress(
-                    programCounter(),
+                    currentPC,
                     currentInstruction.instructionBytes().length
-                    )
-                ;
+                    );
 
         }
+
+        System.out.println("Out of Loop");
+
         return all_string;
         }            
     public void  setParsedInstructions(String other){
