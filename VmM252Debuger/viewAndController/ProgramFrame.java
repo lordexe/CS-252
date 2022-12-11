@@ -41,11 +41,11 @@ public class ProgramFrame extends JFrame{
         // create text FieldView pannel
 
         textFieldViewAndController DisplayPanel = new textFieldViewAndController(machine);
+        machine.attach(DisplayPanel);
     
         // Create button pannel
     
         buttonsPanel buttonsPanel = new buttonsPanel(machine);
-    
         // Create running debuger process pannel
     
         DisplayRunPanel runningPanel = new DisplayRunPanel(machine);

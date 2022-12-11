@@ -2,9 +2,8 @@ package viewAndController.JtextViewAndController;
 
 import java.awt.*;
 import java.awt.event.*;
-import java.util.Scanner;
-import javax.swing.*;
 
+import javax.swing.*;
 import model.VM252DebuggerModel;
 import observation.*;
 
@@ -109,6 +108,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
         JLabel ACCLabel = new JLabel("ACC:", JLabel.RIGHT);
         setACCTextFieldValue(new JTextField("" + getTextBox().accumulator(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        System.out.println(getTextBox().accumulator());
         ActionListener setAccValue = new ActionListener(){
 	        public void actionPerformed(ActionEvent accChange){
                 try
@@ -132,14 +132,14 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
             public void actionPerformed(ActionEvent e) {
                 getTextBox().resetDisplayContents();
                 try{
-                    if (Short.valueOf(getPCTextField().getText()) >= ((short)8192) || Short.valueOf(getPCTextField().getText()) < ((short) 0))
+                    if (Integer.parseInt(getPCTextField().getText()) >= ((Integer)8192) || Integer.parseInt(getPCTextField().getText()) < ((Integer) 0))
                     {
                         getTextBox().setDisplayContents(new String[] {"No address " + getPCTextField().getText()});
                         getTextBox().resetDisplayContents();
                         getTextBox().setProgramCounter(getTextBox().programCounter());
                     }else
                     {
-                        getTextBox().setProgramCounter(Short.valueOf(getPCTextField().getText()));
+                        getTextBox().setProgramCounter(Integer.parseInt(getPCTextField().getText()));
                         getTextBox().setHalt(false);
                         getTextBox().setDisplayContents(new String[] {"Set PC value to " + getPCTextField().getText()});
                         getTextBox().resetDisplayContents();
@@ -204,12 +204,11 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
     public void update()
     {
         //set text fields to display the updated information
-
         getACCTextField().setText("" + getTextBox().accumulator());
         getPCTextField().setText("" + getTextBox().programCounter());
         getInstructionTextFieldValue().setText("" + getTextBox().getNextInst());
-        System.out.println("Here!!!");
-        getInputTextField().setText("" + getTextBox());
+        System.out.println(getTextBox().getNextInst());
+        getInputTextField().setText("" + getTextBox().getInputValue());
     }
 
     @Override

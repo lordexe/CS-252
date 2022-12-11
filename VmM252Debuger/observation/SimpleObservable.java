@@ -42,10 +42,11 @@ public class SimpleObservable implements Observable
     @Override
     public void announceChange()
     {
-
-        for (Observer currentObserver : observers())
+        System.out.println("Observing!!");
+        for (Observer currentObserver : observers()){
+            
             currentObserver.update();
-
+            }
         }
 
     }
