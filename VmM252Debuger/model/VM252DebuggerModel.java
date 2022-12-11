@@ -15,7 +15,7 @@ public class VM252DebuggerModel extends SimpleObservable
     private int myProgramCounter;
     private final byte [ ] myMemory
         = new byte [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
-    private StoppedCategory myStoppedStatus;
+    private StoppedCategory myStoppedStatus = StoppedCategory.notStopped;
     private boolean myPauseStatus;
     private boolean suppressPcIncrement;
     private VM252ArchitectureSpecifications.Instruction currentInstruction;

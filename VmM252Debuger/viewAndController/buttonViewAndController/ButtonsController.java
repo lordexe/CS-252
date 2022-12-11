@@ -6,6 +6,7 @@ import java.awt.event.*;
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
+import model.VM252DebuggerModel.StoppedCategory;
 
 
 public class ButtonsController extends JPanel
@@ -261,11 +262,11 @@ public class ButtonsController extends JPanel
                 getModel().setDisplayContents(new String [] {"Program stopped"});
             }else
             {
-                while(!getModel().getHaltStatus() && !hitBreakPoint)
+                while(getModel().stoppedStatus() == StoppedCategory.notStopped && !hitBreakPoint)
                 {
-                    if(getModel().getPauseStatus() == false)
+                    if(getModel().stoppedStatus() == StoppedCategory.stopped)
                     System.out.println("Not get model!!");
-                     // do nothing
+                    // do nothing
                     else if (getModel().getBreakPoint() == getModel().programCounter())
                     {   
                         System.out.println("Yes get model!!");
