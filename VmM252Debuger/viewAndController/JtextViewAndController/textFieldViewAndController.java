@@ -8,7 +8,7 @@ import javax.swing.*;
 import model.VM252DebuggerModel;
 import observation.*;
 
-public class textFieldViewAndController extends JPanel implements Observer
+public class textFieldViewAndController extends JPanel implements SimpleObserver
 {
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;
@@ -163,6 +163,7 @@ public class textFieldViewAndController extends JPanel implements Observer
         getACCTextField().setText("" + getTextBox().accumulator());
         getPCTextField().setText("" + getTextBox().programCounter());
         getInstructionTextField().setText("" + getTextBox().getNextInst());
+        System.out.println(getTextBox().getNextInst());
         getInputTextField().setText("" + getTextBox());
     }
 

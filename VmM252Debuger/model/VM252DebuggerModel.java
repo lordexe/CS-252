@@ -4,7 +4,7 @@ import vm252architecturespecifications.VM252ArchitectureSpecifications;
 import vm252architecturespecifications.VM252ArchitectureSpecifications.Instruction;
 import Packages.vm252simulation.ObservableVM252;
 import Packages.vm252simulation.VM252Observer;
-public class VM252DebuggerModel extends SimpleObservable implements ObservableVM252
+public class VM252DebuggerModel extends SimpleObservable
 {
     public enum StoppedCategory {
         notStopped,
@@ -115,12 +115,12 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
     public void setAccumulator(int other){
         myAccumulator = ((short) other);
-        announceAccumulatorChange();
+        announceChange();
     }
 
     public void setStoppedStatus(StoppedCategory other){
         myStoppedStatus = other;
-        announceStoppedStatusChange();
+        announceChange();
         }
     
     public void setInstruction(String other) {
@@ -275,8 +275,6 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
                 }
 
-            System.out.println("Inside of the Loop");
-
         if (! suppressProgramCounterIncrement)
             currentPC = 
                 VM252ArchitectureSpecifications.nextMemoryAddress(
@@ -285,8 +283,6 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
                     );
 
         }
-
-        System.out.println("Out of Loop");
 
         return all_string;
         }            
@@ -313,7 +309,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
         else {
             myProgramCounter = other;
-            announceProgramCounterChange();
+            announceChange();
             };
 
         }
@@ -327,7 +323,7 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
                     );
         else {
             myMemory[ address ] = other;
-            announceMemoryChange(address);
+            announceChange();
             }
         }
 
@@ -552,40 +548,6 @@ public class VM252DebuggerModel extends SimpleObservable implements ObservableVM
 
             }
         }
-
-    @Override
-    public void announceAccumulatorChange() {
-        // TODO Auto-generated method stub
-        for (Observer currentObserver : observers())
-
-                if (currentObserver instanceof VM252Observer)
-                    ((VM252Observer) currentObserver).updateAccumulator();
-
-        }
-
-    @Override
-    public void announceProgramCounterChange() {
-        // TODO Auto-generated method stub
-        for (Observer currentObserver : observers())
-            if (currentObserver instanceof VM252Observer)
-                ((VM252Observer) currentObserver).updateProgramCounter();
-            }
-
-    @Override
-    public void announceMemoryChange(int addressOfChangedByte) {
-        // TODO Auto-generated method stub
-        for (Observer currentObserver : observers())
-            if (currentObserver instanceof VM252Observer)
-                ((VM252Observer) currentObserver).updateMemory(addressOfChangedByte);
-            }
-
-    @Override
-    public void announceStoppedStatusChange() {
-        // TODO Auto-generated method stub
-        for (Observer currentObserver : observers())
-            if (currentObserver instanceof VM252Observer)
-                ((VM252Observer) currentObserver).updateStoppedStatus();
-            }
 
     @Override
     public void announceChange() {

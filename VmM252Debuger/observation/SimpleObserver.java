@@ -1,14 +1,7 @@
 package observation;
 
 
-public class SimpleObserver implements Observer
+public interface SimpleObserver extends Observer
 {
-
-    public void update()
-    {
-
-        ; // do nothing
-
-        }
 
     }
