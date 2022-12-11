@@ -118,6 +118,30 @@ public class ButtonsController extends JPanel
 
         RunStepListener runStepListener = new RunStepListener();
         Cmd_n.addActionListener(runStepListener);
+
+        //
+        // Add action listener for increase speed and decrease speed command
+        //
+
+        ChangeSpeedListener changeSpeedListener = new ChangeSpeedListener();
+        instructionIncrease.addActionListener(changeSpeedListener);
+        instructionDecrease.addActionListener(changeSpeedListener);
+
+        //
+        // Add action listener for stop and resume command
+        //
+
+        ChangeRunningStatus changeRunningStatus = new ChangeRunningStatus();
+        stop.addActionListener(changeRunningStatus);
+        resume.addActionListener(changeRunningStatus);
+
+        //
+        // Add action Listener for ba text field
+        //
+
+        setBreakPointListener baListener = new setBreakPointListener();
+        input_ba.addActionListener(baListener);
+
             
         // Add the buttons to the toolbar
 
@@ -149,12 +173,29 @@ public class ButtonsController extends JPanel
         add(getPanel());
     }
 
-    private class RunButtonActionListener implements ActionListener
+    private class setBreakPointListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
         {
-            ExecutionThread runThread = new ExecutionThread();
-            runThread.start();
+            try
+            {
+                short breakPointPosition = Short.valueOf(input_ba.getText());
+                if(breakPointPosition > 8191 || breakPointPosition < 0)
+                {
+                    getModel().setDisplayContents(new String[] {"No address" + breakPointPosition});
+                    getModel().resetDisplayContents();
+                }else
+                {
+                    getModel().setBreakPoint(breakPointPosition);
+                    getModel().setDisplayContents(new String[] {"set breakpoint at address " + breakPointPosition});
+                }
+            }catch(NumberFormatException err)
+            {
+                getModel().setDisplayContents(new String [] {"Not a valid input. ba value must be a number"});
+                getModel().resetDisplayContents();
+
+            }
+
         }
     }
 
@@ -167,6 +208,46 @@ public class ButtonsController extends JPanel
         }
     }
 
+    private class RunButtonActionListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            ExecutionThread runThread = new ExecutionThread();
+            runThread.start();
+        }
+    }
+
+    private class ChangeSpeedListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            if (event.getSource() == instructionIncrease)
+            {
+                int currentSpeed = getModel().getExecutingSpeed();
+                getModel().setExecutingSpeed(currentSpeed < 0 ? 0 : (currentSpeed - 500));
+            }else if (event.getSource() == instructionDecrease)
+            {
+                int currentSpeed = getModel().getExecutingSpeed();
+                getModel().setExecutingSpeed(currentSpeed + 500);
+            }else
+                ; // do nothing
+        }
+    }
+
+    private class ChangeRunningStatus implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            if (event.getSource() == stop)
+                getModel().setPauseStatus(true);
+            else if (event.getSource() == resume)
+                getModel().setPauseStatus(false);
+            else
+                ; //do nothing
+        }
+    }
+
+    
     private class ExecutionThread extends Thread{
         @Override
         public void run()
@@ -182,10 +263,12 @@ public class ButtonsController extends JPanel
             {
                 while(!getModel().getHaltStatus() && !hitBreakPoint)
                 {
-                    if(getModel().getPauseStatus())
-                        ; // do nothing
-                else if (getModel().getBreakPoint() == getModel().programCounter())
-                    {
+                    if(getModel().getPauseStatus() == false)
+                    System.out.println("Not get model!!");
+                     // do nothing
+                    else if (getModel().getBreakPoint() == getModel().programCounter())
+                    {   
+                        System.out.println("Yes get model!!");
                         getModel().runProgram();
                         getModel().setDisplayContents(new String [] {"Hit breakpoint at address " + getModel().getBreakPoint() });
                         hitBreakPoint = true;

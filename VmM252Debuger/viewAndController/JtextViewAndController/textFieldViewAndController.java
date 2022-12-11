@@ -23,6 +23,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
     private JTextField myInstructionTextField;
     private JTextField myInputTextField;
 
+
     // Accessors
 
     private JPanel getPanel()
@@ -39,7 +40,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
     {
         return myPCTextField;
     }
-    private JTextField getInstructionTextField()
+    private JTextField getInstructionTextFieldValue()
     {
         return myInstructionTextField;
     }
@@ -89,6 +90,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
         if (getTextBox() != null)
         getTextBox().detach(this);
     }
+
     //Ctors
 
     public textFieldViewAndController()
@@ -100,30 +102,84 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
     public textFieldViewAndController(VM252DebuggerModel initialValues)
     {
-        setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
+        
+        
 
         setTextBox(initialValues);
 
-        // Creating text fields
-
-        setACCTextFieldValue(new JTextField("" + getTextBox().accumulator(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
-
-        setPCTextFieldValue(new JTextField("" + getTextBox().programCounter(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
-
-        setInstructionTextFieldValue(new JTextField("" + getTextBox().getInstruction(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
-
-        setInputTextFieldValue(new JTextField("", OUR_INPUT_FIELD_AND_AREA_WIDTH));
-
-        //Creating labels
-
         JLabel ACCLabel = new JLabel("ACC:", JLabel.RIGHT);
-        JLabel PCLabel = new JLabel("PC:", JLabel.RIGHT);
-        JLabel InstructionLabel = new JLabel("Instruction:", JLabel.RIGHT);
-        JLabel InputLabel = new JLabel("Input:", JLabel.RIGHT);
+        setACCTextFieldValue(new JTextField("" + getTextBox().accumulator(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
+        ActionListener setAccValue = new ActionListener(){
+	        public void actionPerformed(ActionEvent accChange){
+                try
+                {
+                    getTextBox().resetDisplayContents();
+                    getTextBox().setAccumulator(Integer.parseInt(getACCTextField().getText()));
+                    getTextBox().setDisplayContents(new String[] {"Set ACC value to " + getACCTextField().getText()});
+                }catch(NumberFormatException err){
+                    getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for ACC Value must be a number"});
+                    getTextBox().resetDisplayContents();
+                }
+
+        }};
+        getACCTextField().addActionListener(setAccValue);
+
+        JLabel PCLabel = new JLabel("PC");
+        setPCTextFieldValue(new JTextField("" + getTextBox().programCounter()));
+
+        ActionListener setPcValue = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                getTextBox().resetDisplayContents();
+                try{
+                    if (Short.valueOf(getPCTextField().getText()) >= ((short)8192) || Short.valueOf(getPCTextField().getText()) < ((short) 0))
+                    {
+                        getTextBox().setDisplayContents(new String[] {"No address " + getPCTextField().getText()});
+                        getTextBox().resetDisplayContents();
+                        getTextBox().setProgramCounter(getTextBox().programCounter());
+                    }else
+                    {
+                        getTextBox().setProgramCounter(Short.valueOf(getPCTextField().getText()));
+                        getTextBox().setHalt(false);
+                        getTextBox().setDisplayContents(new String[] {"Set PC value to " + getPCTextField().getText()});
+                        getTextBox().resetDisplayContents();
+                        getTextBox().setNextInst(getTextBox().getCurrentInstruction().symbolicOpcode());
+                    }
+                }catch(NumberFormatException err){
+                        getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for PC Value must be a number"});
+                        getTextBox().resetDisplayContents();
+                    }
+                // pc is set to counter.getText()
+            }
+        };
+        getPCTextField().addActionListener(setPcValue);
+
+        JLabel nextInstructionLabel = new JLabel("Next Instruction");
+        setInstructionTextFieldValue(new JTextField(getTextBox().getNextInst()));
+        getInstructionTextFieldValue().setEditable(false);
+
+
+        JLabel inputLabel = new JLabel("Input");
+        setInputTextFieldValue(new JTextField("" + getTextBox().getInputValue()));
+        ActionListener setInputValue = new ActionListener(){
+	        public void actionPerformed(ActionEvent inputChange){
+                getTextBox().resetDisplayContents();
+                try{
+                    getTextBox().setInputValue(Short.valueOf(getInputTextField().getText()));
+                    getTextBox().setInputReady(true);
+                }catch(NumberFormatException err){
+                    getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for value must be a number"});
+                    getTextBox().resetDisplayContents();
+                }
+                //getSubjectModel().getSemaphore().release();
+                //notifyAll();
+          }};
+        getInputTextField().addActionListener(setInputValue);
 
         //Create panels
 
         setPanel(new JPanel());
+        getPanel().setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
         getPanel().setLayout(new GridLayout(4, 2));
 
         //add labels to text fields
@@ -132,26 +188,15 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
         getPanel().add(getACCTextField());
         getPanel().add(PCLabel);
         getPanel().add(getPCTextField());
-        getPanel().add(InstructionLabel);
-        getPanel().add(getInstructionTextField());
-        getInstructionTextField().setEditable(false);
-        getPanel().add(InputLabel);
+        getPanel().add(nextInstructionLabel);
+        getPanel().add(getInstructionTextFieldValue());
+        getInstructionTextFieldValue().setEditable(false);
+        getPanel().add(inputLabel);
         getPanel().add(getInputTextField());
 
         //add panel to container
 
         add(getPanel());
-
-        //Create Action
-
-        commandInputAction inputAction = new commandInputAction();
-
-        //associate with listener
-
-        getACCTextField().addActionListener(inputAction);
-        getPCTextField().addActionListener(inputAction);
-        getInstructionTextField().addActionListener(inputAction);
-        getInputTextField().addActionListener(inputAction);
     }
 
     //Observation Method
@@ -162,51 +207,9 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
         getACCTextField().setText("" + getTextBox().accumulator());
         getPCTextField().setText("" + getTextBox().programCounter());
-        getInstructionTextField().setText("" + getTextBox().getNextInst());
+        getInstructionTextFieldValue().setText("" + getTextBox().getNextInst());
         System.out.println(getTextBox().getNextInst());
         getInputTextField().setText("" + getTextBox());
-    }
-
-    private class commandInputAction implements ActionListener
-    {
-        //Ctors
-
-        public commandInputAction()
-        {
-
-        }
-
-        //Event Handlers
-
-        @Override
-        public void actionPerformed(ActionEvent event)
-        {
-            if (getTextBox() != null)
-            {
-                Scanner ACCValueScanner = new Scanner(getACCTextField().getText());
-
-                Scanner PCValueScanner = new Scanner(getPCTextField().getText());
-
-                Scanner InstructionValueScanner = new Scanner(getInstructionTextField().getText());
-
-                Scanner InputValueScanner = new Scanner(getInputTextField().getText());
-
-                int ACCValue = ACCValueScanner.hasNextInt() ? ACCValueScanner.nextInt():0;
-
-                int PCValue = PCValueScanner.hasNextInt() ? PCValueScanner.nextInt(): 0;
-
-                String InstructionValue = InstructionValueScanner.next();
-
-                int InputValue = InputValueScanner.hasNextByte() ? InputValueScanner.nextInt(): 0;
-
-                getTextBox().setAccumulator(ACCValue);
-                getTextBox().setProgramCounter(PCValue);
-                getTextBox().setInstruction(InstructionValue);
-                getTextBox().setAccumulator(InputValue);
-
-
-            }
-        }
     }
 
     @Override

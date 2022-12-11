@@ -92,7 +92,6 @@ public class ObjFileStringPanel extends JPanel implements Observer {
     }
     @Override
     public void update() {
-        // TODO Auto-generated method stub
         if(!(getSubject().getDisplayContents().length == 1 && getSubject().getDisplayContents()[0] == ""))
         {
             String displayString = "";

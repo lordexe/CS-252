@@ -190,7 +190,7 @@ public class VM252DebuggerModel extends SimpleObservable
         currentInstruction = fectchByPair(programCounter());
     }
 
-    private Instruction getCurrentInstruction()
+    public Instruction getCurrentInstruction()
     {
         return currentInstruction;
     }
@@ -285,7 +285,8 @@ public class VM252DebuggerModel extends SimpleObservable
         }
 
         return all_string;
-        }            
+        }  
+                  
     public void  setParsedInstructions(String other){
         objFileString = other;
     }
