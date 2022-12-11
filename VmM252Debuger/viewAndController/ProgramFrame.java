@@ -5,7 +5,7 @@ import javax.swing.*;
 import model.VM252DebuggerModel;
 import viewAndController.JtextViewAndController.textFieldViewAndController;
 import viewAndController.buttonViewAndController.*;
-import viewAndController.readableViewAndController.DisplayRunPanel;
+import viewAndController.readableViewAndController.*;
 public class ProgramFrame extends JFrame{
 
     private static final int OUR_DEFAULT_WIDTH = 800;
@@ -49,6 +49,8 @@ public class ProgramFrame extends JFrame{
         // Create running debuger process pannel
     
         DisplayRunPanel runningPanel = new DisplayRunPanel(machine);
+
+        ObjFileStringPanel ObjStringPanel = new ObjFileStringPanel(machine);
     
         // Create panel to hold all views and controllers
     
@@ -65,6 +67,10 @@ public class ProgramFrame extends JFrame{
     
         runningPanel.setBounds(0, 100, 500, 300);
         getPanel().add(runningPanel);
+
+        ObjStringPanel.setBounds(500, 200, 400, 300);
+        getPanel().add(ObjStringPanel);
+
     
     
         add(getPanel());

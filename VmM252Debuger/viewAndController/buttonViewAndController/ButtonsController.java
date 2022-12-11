@@ -105,6 +105,10 @@ public class ButtonsController extends JPanel
 
         Cmd_q.addActionListener(quitListener);  
 
+        //
+        // Add action listener for r command button
+        //
+
         RunButtonActionListener runListener = new RunButtonActionListener();
         Cmd_r.addActionListener(runListener);
 
@@ -114,22 +118,6 @@ public class ButtonsController extends JPanel
 
         RunStepListener runStepListener = new RunStepListener();
         Cmd_n.addActionListener(runStepListener);
-
-        //
-        // Add action listener for increase speed and decrease speed command
-        //
-
-        ChangeSpeedListener changeSpeedListener = new ChangeSpeedListener();
-        instructionIncrease.addActionListener(changeSpeedListener);
-        instructionDecrease.addActionListener(changeSpeedListener);
-
-        //
-        // Add action listener for stop and resume command
-        //
-
-        ChangeRunningStatus changeRunningStatus = new ChangeRunningStatus();
-        stop.addActionListener(changeRunningStatus);
-        resume.addActionListener(changeRunningStatus);
             
         // Add the buttons to the toolbar
 
@@ -170,6 +158,15 @@ public class ButtonsController extends JPanel
         }
     }
 
+    private class RunStepListener implements ActionListener
+    {
+        public void actionPerformed(ActionEvent event)
+        {
+            StepExecutionThread runStepThread = new StepExecutionThread();
+            runStepThread.start();
+        }
+    }
+
     private class ExecutionThread extends Thread{
         @Override
         public void run()
@@ -199,6 +196,23 @@ public class ButtonsController extends JPanel
                         Thread.sleep(getModel().getExecutingSpeed());
                     }catch(Exception e){}
                 }
+            }
+        }
+    }
+
+    private class StepExecutionThread extends Thread{
+        @Override
+        public void run()
+        {
+            //
+            // execute obj file in another thread
+            //
+            if(getModel().getHaltStatus())
+            {
+                getModel().setDisplayContents(new String [] {"Program stopped"});
+            }else
+            {
+                getModel().runProgram();
             }
         }
     }
