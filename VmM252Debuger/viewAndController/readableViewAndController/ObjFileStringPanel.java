@@ -1,7 +1,6 @@
 package viewAndController.readableViewAndController;
 
 import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
@@ -73,7 +72,7 @@ public class ObjFileStringPanel extends JPanel implements Observer {
 
         setPanel(new JPanel());
 
-        setDisplayBox(new JTextArea(getContent()));
+        setDisplayBox(new JTextArea("Obj File Instructions:" + "\n" + "\n" + getContent()));
         getDisplayBox().setBounds(150,25, OUR_DEFAULT_WIDTH,OUR_DEFAULT_HEIGHT);
         getDisplayBox().setBackground(new Color(255,255,255));
         getDisplayBox().setForeground(Color.BLACK);

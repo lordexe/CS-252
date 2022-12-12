@@ -4,7 +4,6 @@ package viewAndController.importObjfile;
 import java.io.File;
 
 import javax.swing.*;
-import java.awt.FlowLayout;
 import javax.swing.filechooser.*;
 import viewAndController.ProgramFrame;
 import vm252utilities.VM252Utilities;

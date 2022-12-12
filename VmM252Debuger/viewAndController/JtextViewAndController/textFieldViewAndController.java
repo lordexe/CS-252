@@ -177,7 +177,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
         setPanel(new JPanel());
         getPanel().setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
-        getPanel().setLayout(new GridLayout(4, 3));
+        getPanel().setLayout(new GridLayout(4, 2));
 
         //add labels to text fields
 

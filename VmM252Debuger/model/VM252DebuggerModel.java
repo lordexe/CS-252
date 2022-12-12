@@ -2,7 +2,6 @@ package model;
 import observation.*;
 import vm252architecturespecifications.VM252ArchitectureSpecifications;
 import vm252architecturespecifications.VM252ArchitectureSpecifications.Instruction;
-import viewAndController.*;
 public class VM252DebuggerModel extends SimpleObservable
 {
     public enum StoppedCategory {

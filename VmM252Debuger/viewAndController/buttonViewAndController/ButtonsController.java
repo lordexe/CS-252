@@ -6,6 +6,7 @@ import javax.swing.*;
 
 import model.VM252DebuggerModel;
 import model.VM252DebuggerModel.StoppedCategory;
+import viewAndController.importObjfile.importObjfileChooser;
 
 
 public class ButtonsController extends JPanel
@@ -19,7 +20,7 @@ public class ButtonsController extends JPanel
 
     // buttons
 
-    private JButton Help_h, Cmd_n, Cmd_q, Cmd_r, Cmd_ba, stop, resume, instructionIncrease, instructionDecrease ;
+    private JButton Help_h, Cmd_n, Cmd_q, Cmd_r, Cmd_ba, Cmd_pf, stop, resume, instructionIncrease, instructionDecrease ;
     private JLabel toolbarLabel, baLabel;
     private JTextField input_ba;
 
@@ -67,7 +68,6 @@ public class ButtonsController extends JPanel
 
         // Create the buttons
 
-        toolbarLabel = new JLabel("Commands Panel ");
         Cmd_r = new JButton(" Run ");
         stop = new JButton(" Hold ");
         Cmd_n = new JButton(" Next ");
@@ -78,6 +78,7 @@ public class ButtonsController extends JPanel
         instructionIncrease = new JButton(" + Speed ");
         instructionDecrease = new JButton (" - Speed ");
         Help_h = new JButton(" Help ");
+        Cmd_pf = new JButton(" New File ");
         Cmd_q = new JButton(" Quit ");
 
 
@@ -112,8 +113,23 @@ public class ButtonsController extends JPanel
                 ((JFrame)myPanel.getTopLevelAncestor()).dispose();
             }
         };
-
         Cmd_q.addActionListener(quitListener);  
+
+        // Pick new file button functionality
+        ActionListener pickFileListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                // close the current JFrame
+                ((JFrame)myPanel.getTopLevelAncestor()).dispose();
+                // Initiate new file picket
+                importObjfileChooser newFile = new importObjfileChooser();
+                // Run the FileChooser to create a new JFrame out of the new chosen file
+                newFile.importObjfileChooser();
+            }
+        };
+        Cmd_pf.addActionListener(pickFileListener);  
+
+
 
         //
         // Add action listener for r command button
@@ -151,16 +167,10 @@ public class ButtonsController extends JPanel
 
         setBreakPointListener baListener = new setBreakPointListener();
         input_ba.addActionListener(baListener);
-
-        //
-        // Add action listener for stop and resume command
-        //
-
             
         // Add the buttons to the toolbar
 
         tool_bar.setFloatable(false);
-        tool_bar.add(toolbarLabel);
         tool_bar.add(Cmd_r);
         tool_bar.add(stop);
         tool_bar.add(Cmd_n);
@@ -171,6 +181,7 @@ public class ButtonsController extends JPanel
         tool_bar.add(instructionIncrease);
         tool_bar.add(instructionDecrease);
         tool_bar.add(Help_h);
+        tool_bar.add(Cmd_pf);
         tool_bar.add(Cmd_q);
 
 

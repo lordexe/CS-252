@@ -94,14 +94,12 @@ public class DisplayRunPanel extends JPanel implements Observer
         // Initially display the model's display contents
         //
 
-        setDisplayBox(new JTextArea("Welcome to Vm252 Debugger" + "\n", 10, 1));
+        setDisplayBox(new JTextArea("Welcome to Vm252 Debugger" + "\n" + "Instructions being executed  will be displayed below." + "\n" + "\n", 10, 1));
         getDisplayBox().setBounds(150, 25, OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
         getDisplayBox().setBackground(new Color(32, 32, 32));
-        getDisplayBox().setForeground(Color.WHITE);
+        getDisplayBox().setForeground(Color.GREEN);
         getDisplayBox().setLineWrap(true);
         getDisplayBox().setEditable(false);
-
-        
 
         JScrollPane scroll = new JScrollPane(getDisplayBox());
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
