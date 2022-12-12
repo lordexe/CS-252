@@ -13,7 +13,6 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
     private static final int OUR_FRAME_WIDTH = 300;
     private static final int OUR_FRAME_HEIGHT = 300;
     private static final int OUR_COMPONENT_FIELD_AND_AREA_WIDTH = 5;
-    private static final int OUR_INPUT_FIELD_AND_AREA_WIDTH = 50;
 
 
     private JPanel myJPanel;
@@ -178,7 +177,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
         setPanel(new JPanel());
         getPanel().setSize(OUR_FRAME_WIDTH, OUR_FRAME_HEIGHT);
-        getPanel().setLayout(new GridLayout(4, 2));
+        getPanel().setLayout(new GridLayout(4, 3));
 
         //add labels to text fields
 

@@ -67,30 +67,38 @@ public class ButtonsController extends JPanel
 
         // Create the buttons
 
-        toolbarLabel = new JLabel("Toolbar ");
-        Cmd_n = new JButton(" n ");
-        Cmd_q = new JButton(" q ");
-        Cmd_r = new JButton(" r ");
-        Cmd_ba = new JButton(" ba ");
-
-        baLabel = new JLabel(" ba: ");
+        toolbarLabel = new JLabel("Commands Panel ");
+        Cmd_r = new JButton(" Run ");
+        stop = new JButton(" Hold ");
+        Cmd_n = new JButton(" Next ");
+        resume = new JButton(" Resume ");
+        Cmd_ba = new JButton(" Break Now ");
+        baLabel = new JLabel(" Break Set: ");
         input_ba = new JTextField("", 10);
-        stop = new JButton("Hold");
-        resume = new JButton("Resume");
-        instructionIncrease = new JButton("Increase Speed");
-        instructionDecrease = new JButton ("Decrease Speed");
+        instructionIncrease = new JButton(" + Speed ");
+        instructionDecrease = new JButton (" - Speed ");
         Help_h = new JButton(" Help ");
+        Cmd_q = new JButton(" Quit ");
+
+
+
+
+
 
         // Help button functionality
         // Prints what different commands are used for
 
         Help_h.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
-                String [] helpContents = {"ba MA = Set a breakpoint at address MA",
+                String [] helpContents = {" ", "----- VM252 Debugger Help -----"," ",
+                "Break Set = Set a breakpoint at count provided",
                 "help = Display help messages",
-                "n = Execute the next machine instruction",
-                "q = Quit",
-                "r = Run machine until error occurs or stop instruction is triggered"
+                "Next = Execute the next instruction",
+                "Run = Start executing the instructions",
+                "Quit = Quit the program",
+                "Hold = Pause the instruction execution display",
+                "Resume = Resume the instruction execution display",
+                "+/- Speed = Changee the speed at which instructions are executed", " "
                 };
 		        getModel().forceSetDisplayContents(helpContents);
             }});
@@ -153,17 +161,25 @@ public class ButtonsController extends JPanel
 
         tool_bar.setFloatable(false);
         tool_bar.add(toolbarLabel);
-        tool_bar.add(Cmd_n);
-        tool_bar.add(Cmd_q);
         tool_bar.add(Cmd_r);
+        tool_bar.add(stop);
+        tool_bar.add(Cmd_n);
+        tool_bar.add(resume);
         tool_bar.add(Cmd_ba);
         tool_bar.add(baLabel);
         tool_bar.add(input_ba);
-        tool_bar.add(stop);
-        tool_bar.add(resume);
         tool_bar.add(instructionIncrease);
         tool_bar.add(instructionDecrease);
         tool_bar.add(Help_h);
+        tool_bar.add(Cmd_q);
+
+
+
+
+
+
+
+
 
 
         setPanel(new JPanel());
@@ -176,7 +192,7 @@ public class ButtonsController extends JPanel
         // Add the panel to the container
         //
 
-        add(getPanel());
+        add(getPanel(), BorderLayout.NORTH);
     }
 
     private class setBreakPointListener implements ActionListener

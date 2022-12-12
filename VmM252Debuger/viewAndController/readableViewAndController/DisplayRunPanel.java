@@ -106,7 +106,7 @@ public class DisplayRunPanel extends JPanel implements Observer
         JScrollPane scroll = new JScrollPane(getDisplayBox());
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setBounds(150, 25, OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
+        scroll.setBounds(150, 2, OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
 
         setLayout(null);
         add(scroll);
