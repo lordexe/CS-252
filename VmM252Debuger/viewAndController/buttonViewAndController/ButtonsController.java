@@ -3,6 +3,7 @@ package viewAndController.buttonViewAndController;
 import java.awt.*;
 import java.util.Scanner;
 import java.awt.event.*;
+import java.awt.BorderLayout;
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
@@ -59,6 +60,7 @@ public class ButtonsController extends JPanel
 
     public ButtonsController(VM252DebuggerModel initialModel)
     {
+        
         setModel(initialModel);
 
         // create a new toolbar
@@ -74,7 +76,7 @@ public class ButtonsController extends JPanel
         Cmd_ba = new JButton(" ba ");
 
         baLabel = new JLabel(" ba: ");
-        input_ba = new JTextField("enter value for ba", 10);
+        input_ba = new JTextField("", 10);
         stop = new JButton("Stop");
         resume = new JButton("Resume");
         instructionIncrease = new JButton("Increase Speed");
@@ -265,11 +267,11 @@ public class ButtonsController extends JPanel
                 while(getModel().stoppedStatus() == StoppedCategory.notStopped && !hitBreakPoint)
                 {
                     if(getModel().stoppedStatus() == StoppedCategory.stopped)
-                    System.out.println("Not get model!!");
+                    System.out.println("! get model!!");
                     // do nothing
                     else if (getModel().getBreakPoint() == getModel().programCounter())
                     {   
-                        System.out.println("Yes get model!!");
+                        System.out.println("get model!!");
                         getModel().runProgram();
                         getModel().setDisplayContents(new String [] {"Hit breakpoint at address " + getModel().getBreakPoint() });
                         hitBreakPoint = true;

@@ -208,6 +208,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
         getPCTextField().setText("" + getTextBox().programCounter());
         getInstructionTextFieldValue().setText("" + getTextBox().getNextInst());
         System.out.println(getTextBox().getNextInst());
+        System.out.println(getTextBox().programCounter());
         getInputTextField().setText("" + getTextBox().getInputValue());
     }
 

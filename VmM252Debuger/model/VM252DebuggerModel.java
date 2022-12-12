@@ -116,23 +116,19 @@ public class VM252DebuggerModel extends SimpleObservable
 
     public void setAccumulator(int other){
         myAccumulator = (other);
-        announceChange();
     }
 
     public void setStoppedStatus(StoppedCategory other){
         myStoppedStatus = other;
-        announceChange();
         }
     
     public void setInstruction(String other) {
         instruction = other;
-        announceChange();
     }
 
     public void setDisplayContents(String[] other)
     {
         displayContents = other;
-        announceChange();
         }
 
     public void resetDisplayContents()
@@ -575,9 +571,7 @@ public class VM252DebuggerModel extends SimpleObservable
                     );
 
             if (stoppedStatus() == StoppedCategory.notStopped)
-            setNextInst(getCurrentInstruction().symbolicOpcode());
-
-
+            setNextInst(currentInstruction.symbolicOpcode());
             }
 
         }

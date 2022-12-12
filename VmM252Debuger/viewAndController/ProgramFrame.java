@@ -59,18 +59,17 @@ public class ProgramFrame extends JFrame{
     
         // Add and setBounds, views and controllers to panel
         
-        DisplayPanel.setBounds(500,100,300,200);
+        DisplayPanel.setBounds(500,100,300,300);
         getPanel().add(DisplayPanel);
+
+        ObjStringPanel.setBounds(0, 400, 500, 300);
+        getPanel().add(ObjStringPanel);
     
         buttonsPanel.setBounds(0, 0, 800, 100);
         getPanel().add(buttonsPanel);
     
         runningPanel.setBounds(0, 100, 500, 300);
         getPanel().add(runningPanel);
-
-        ObjStringPanel.setBounds(500, 200, 400, 300);
-        getPanel().add(ObjStringPanel);
-
     
     
         add(getPanel());
