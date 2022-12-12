@@ -259,7 +259,7 @@ public class ButtonsController extends JPanel
             // execute obj file in another thread
             //
             boolean hitBreakPoint = false;
-            if(getModel().getStoppedStatus() == StoppedCategory.notStopped)
+            if(getModel().stoppedStatus() == StoppedCategory.stopped)
             {
                 getModel().setDisplayContents(new String [] {"Program stopped"});
             }else
@@ -293,7 +293,7 @@ public class ButtonsController extends JPanel
             //
             // execute obj file in another thread
             //
-            if(getModel().getStoppedStatus() == StoppedCategory.notStopped)
+            if(getModel().stoppedStatus() == StoppedCategory.stopped)
             {
                 getModel().setDisplayContents(new String [] {"Program stopped"});
             }else

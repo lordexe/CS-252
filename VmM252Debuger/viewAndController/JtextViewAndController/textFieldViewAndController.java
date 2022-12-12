@@ -4,6 +4,7 @@ import java.awt.*;
 import java.awt.event.*;
 
 import javax.swing.*;
+
 import model.VM252DebuggerModel;
 import observation.*;
 
@@ -140,7 +141,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
                     }else
                     {
                         getTextBox().setProgramCounter(Integer.parseInt(getPCTextField().getText()));
-                        getTextBox().setHalt(false);
+                        getTextBox().setStoppedStatus(VM252DebuggerModel.StoppedCategory.notStopped);
                         getTextBox().setDisplayContents(new String[] {"Set PC value to " + getPCTextField().getText()});
                         getTextBox().resetDisplayContents();
                         getTextBox().setNextInst(getTextBox().getCurrentInstruction().symbolicOpcode());
@@ -149,7 +150,6 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
                         getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for PC Value must be a number"});
                         getTextBox().resetDisplayContents();
                     }
-                // pc is set to counter.getText()
             }
         };
         getPCTextField().addActionListener(setPcValue);
@@ -171,8 +171,6 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
                     getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for value must be a number"});
                     getTextBox().resetDisplayContents();
                 }
-                //getSubjectModel().getSemaphore().release();
-                //notifyAll();
           }};
         getInputTextField().addActionListener(setInputValue);
 

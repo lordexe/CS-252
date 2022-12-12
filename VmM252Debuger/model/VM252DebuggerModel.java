@@ -16,7 +16,7 @@ public class VM252DebuggerModel extends SimpleObservable
     private int myProgramCounter;
     private final byte [ ] myMemory
         = new byte [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
-    private StoppedCategory myStoppedStatus = StoppedCategory.notStopped;
+    private StoppedCategory myStoppedStatus;
     private boolean myPauseStatus;
     private boolean suppressPcIncrement;
     private VM252ArchitectureSpecifications.Instruction currentInstruction;
@@ -120,10 +120,6 @@ public class VM252DebuggerModel extends SimpleObservable
     public void setStoppedStatus(StoppedCategory other){
         myStoppedStatus = other;
         }
-
-    public StoppedCategory getStoppedStatus(){
-        return myStoppedStatus;
-        }
     
     public void setInstruction(String other) {
         instruction = other;
@@ -154,6 +150,11 @@ public class VM252DebuggerModel extends SimpleObservable
     private void setSuppressPcStatus(boolean other)
     {
         suppressPcIncrement = other;
+    }
+
+    private boolean getSuppressPcStatus()
+    {
+        return suppressPcIncrement;
     }
 
     private Instruction fectchByPair(int address)
@@ -351,6 +352,7 @@ public class VM252DebuggerModel extends SimpleObservable
         String [] welcomeContents = {""};
 
         setSuppressPcStatus(false);
+        setStoppedStatus(StoppedCategory.notStopped);
         setAccumulator(0);
         setProgramCounter(0);
         setDisplayContents(welcomeContents);
@@ -554,7 +556,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 }
 
-            if (stoppedStatus() == StoppedCategory.notStopped && !suppressProgramCounterIncrement)
+            if (stoppedStatus() == StoppedCategory.notStopped && !getSuppressPcStatus())
                 resetDisplayContents();
                 setProgramCounter(
                     VM252ArchitectureSpecifications.nextMemoryAddress(
