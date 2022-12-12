@@ -208,14 +208,13 @@ public class VM252DebuggerModel extends SimpleObservable
     {
         Instruction currInstruction;
         String all_string = "";
-        boolean suppressProgramCounterIncrement;
         boolean endCodeChecker = false;
         int currentPC= 0 ;
         
 
         while(!endCodeChecker){
             currInstruction = fectchByPair(currentPC);
-            suppressProgramCounterIncrement = false;
+            setSuppressPcStatus(false);
 
             switch (currentInstruction.numericOpcode()) {
 
@@ -273,7 +272,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 }
 
-        if (! suppressProgramCounterIncrement)
+        if (! getSuppressPcStatus())
             currentPC = 
                 VM252ArchitectureSpecifications.nextMemoryAddress(
                     currentPC,
@@ -423,7 +422,6 @@ public class VM252DebuggerModel extends SimpleObservable
         if (stoppedStatus() == StoppedCategory.notStopped ){
             Instruction currentInstruction;
             int data;
-            boolean suppressProgramCounterIncrement;
 
             try{
                 currentInstruction = new Instruction(
@@ -443,23 +441,23 @@ public class VM252DebuggerModel extends SimpleObservable
         // Simulate the execution of currentInstruction
         //
 
-            suppressProgramCounterIncrement = false;
+            setSuppressPcStatus(false);
 
             switch (currentInstruction.numericOpcode()) {
 
                 case VM252ArchitectureSpecifications.LOAD_OPCODE :
-                    setAccumulator(
-                        fetchMemoryData(currentInstruction.numericOperand())
-                        );
-                        setDisplayContents(new String [] {"Addr " + programCounter() +
+                    resetDisplayContents();
+                    setAccumulator(currentInstruction.numericOperand());
+                    setDisplayContents(new String [] {"Addr " + programCounter() +
                          ": " + "LOAD " + currentInstruction.numericOperand()});
-                         setNextInst(currentInstruction.symbolicOpcode());
+                    setNextInst(currentInstruction.symbolicOpcode());
                     break;
 
                 case VM252ArchitectureSpecifications.SET_OPCODE :
-                        setDisplayContents(new String [] {"Addr " + programCounter() +
+                    resetDisplayContents();
+                    setDisplayContents(new String [] {"Addr " + programCounter() +
                          ": " + "SET " + currentInstruction.numericOperand()});
-                         setNextInst(currentInstruction.symbolicOpcode());
+                    setNextInst(currentInstruction.symbolicOpcode());
                     break;
 
                 case VM252ArchitectureSpecifications.STORE_OPCODE :
@@ -494,12 +492,11 @@ public class VM252DebuggerModel extends SimpleObservable
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_OPCODE :
-                    setProgramCounter(
-                        currentInstruction.numericOperand()
-                        );
+                    setProgramCounter(currentInstruction.numericOperand());
                     setDisplayContents(new String [] {"Addr " + programCounter() + 
                     ": " + "JUMP " + currentInstruction.numericOperand()});
-                    suppressProgramCounterIncrement = true;
+                    resetDisplayContents();
+                    setSuppressPcStatus(true);
                     setNextInst(currentInstruction.symbolicOpcode());
                     break;
 
@@ -511,7 +508,8 @@ public class VM252DebuggerModel extends SimpleObservable
                         setProgramCounter(
                             currentInstruction.numericOperand()
                             );
-                        suppressProgramCounterIncrement = true;
+                        resetDisplayContents();
+                        setSuppressPcStatus(true);
                         }
                     setNextInst(currentInstruction.symbolicOpcode());
                     break;
@@ -524,7 +522,7 @@ public class VM252DebuggerModel extends SimpleObservable
                         setProgramCounter(
                             currentInstruction.numericOperand()
                             );
-                        suppressProgramCounterIncrement = true;
+                        setSuppressPcStatus(true);
                         }
                     setNextInst(currentInstruction.symbolicOpcode());
                     break;
