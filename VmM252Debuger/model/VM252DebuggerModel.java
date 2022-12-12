@@ -128,7 +128,13 @@ public class VM252DebuggerModel extends SimpleObservable
     public void setDisplayContents(String[] other)
     {
         displayContents = other;
-        }
+    }
+
+    public void forceSetDisplayContents(String[] other)
+    {
+        displayContents = other;
+        announceChange();
+    }
 
     public void resetDisplayContents()
     {

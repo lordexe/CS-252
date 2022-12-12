@@ -107,7 +107,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
         setTextBox(initialValues);
 
-        JLabel ACCLabel = new JLabel("ACC:", JLabel.RIGHT);
+        JLabel ACCLabel = new JLabel("ACC: ", JLabel.RIGHT);
         setACCTextFieldValue(new JTextField("" + getTextBox().accumulator(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
         System.out.println(getTextBox().accumulator());
         ActionListener setAccValue = new ActionListener(){
@@ -116,16 +116,16 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
                 {
                     getTextBox().resetDisplayContents();
                     getTextBox().setAccumulator(Integer.parseInt(getACCTextField().getText()));
-                    getTextBox().setDisplayContents(new String[] {"Set ACC value to " + getACCTextField().getText()});
+                    getTextBox().forceSetDisplayContents(new String[] {"Set ACC value to " + getACCTextField().getText()});
                 }catch(NumberFormatException err){
-                    getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for ACC Value must be a number"});
+                    getTextBox().forceSetDisplayContents(new String [] {"Not a valid input. Input for ACC Value must be a number"});
                     getTextBox().resetDisplayContents();
                 }
 
         }};
         getACCTextField().addActionListener(setAccValue);
 
-        JLabel PCLabel = new JLabel("PC");
+        JLabel PCLabel = new JLabel("PC: ", JLabel.RIGHT);
         setPCTextFieldValue(new JTextField("" + getTextBox().programCounter()));
 
         ActionListener setPcValue = new ActionListener() {
@@ -142,24 +142,24 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
                     {
                         getTextBox().setProgramCounter(Integer.parseInt(getPCTextField().getText()));
                         getTextBox().setStoppedStatus(VM252DebuggerModel.StoppedCategory.notStopped);
-                        getTextBox().setDisplayContents(new String[] {"Set PC value to " + getPCTextField().getText()});
+                        getTextBox().forceSetDisplayContents(new String[] {"Set PC value to " + getPCTextField().getText()});
                         getTextBox().resetDisplayContents();
                         getTextBox().setNextInst(getTextBox().getCurrentInstruction().symbolicOpcode());
                     }
                 }catch(NumberFormatException err){
-                        getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for PC Value must be a number"});
+                        getTextBox().forceSetDisplayContents(new String [] {"Not a valid input. Input for PC Value must be a number"});
                         getTextBox().resetDisplayContents();
                     }
             }
         };
         getPCTextField().addActionListener(setPcValue);
 
-        JLabel nextInstructionLabel = new JLabel("Next Instruction");
+        JLabel nextInstructionLabel = new JLabel("Next Instruction: ", JLabel.RIGHT);
         setInstructionTextFieldValue(new JTextField(getTextBox().getNextInst()));
         getInstructionTextFieldValue().setEditable(false);
 
 
-        JLabel inputLabel = new JLabel("Input");
+        JLabel inputLabel = new JLabel("Input: ", JLabel.RIGHT);
         setInputTextFieldValue(new JTextField("" + getTextBox().getInputValue()));
         ActionListener setInputValue = new ActionListener(){
 	        public void actionPerformed(ActionEvent inputChange){
@@ -168,7 +168,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
                     getTextBox().setInputValue(Short.valueOf(getInputTextField().getText()));
                     getTextBox().setInputReady(true);
                 }catch(NumberFormatException err){
-                    getTextBox().setDisplayContents(new String [] {"Not a valid input. Input for value must be a number"});
+                    getTextBox().forceSetDisplayContents(new String [] {"Not a valid input. Input for value must be a number"});
                     getTextBox().resetDisplayContents();
                 }
           }};

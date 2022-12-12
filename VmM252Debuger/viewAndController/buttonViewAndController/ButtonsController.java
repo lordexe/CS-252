@@ -1,9 +1,7 @@
 package viewAndController.buttonViewAndController;
 
 import java.awt.*;
-import java.util.Scanner;
 import java.awt.event.*;
-import java.awt.BorderLayout;
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
@@ -77,7 +75,7 @@ public class ButtonsController extends JPanel
 
         baLabel = new JLabel(" ba: ");
         input_ba = new JTextField("", 10);
-        stop = new JButton("Stop");
+        stop = new JButton("Hold");
         resume = new JButton("Resume");
         instructionIncrease = new JButton("Increase Speed");
         instructionDecrease = new JButton ("Decrease Speed");
@@ -85,6 +83,7 @@ public class ButtonsController extends JPanel
 
         // Help button functionality
         // Prints what different commands are used for
+
         Help_h.addActionListener(new ActionListener(){
 	        public void actionPerformed(ActionEvent e){
                 String [] helpContents = {"ba MA = Set a breakpoint at address MA",
@@ -93,7 +92,7 @@ public class ButtonsController extends JPanel
                 "q = Quit",
                 "r = Run machine until error occurs or stop instruction is triggered"
                 };
-		        getModel().setDisplayContents(helpContents);
+		        getModel().forceSetDisplayContents(helpContents);
             }});
 
         // Quit button functionality
@@ -145,6 +144,10 @@ public class ButtonsController extends JPanel
         setBreakPointListener baListener = new setBreakPointListener();
         input_ba.addActionListener(baListener);
 
+        //
+        // Add action listener for stop and resume command
+        //
+
             
         // Add the buttons to the toolbar
 
@@ -185,7 +188,7 @@ public class ButtonsController extends JPanel
                 short breakPointPosition = Short.valueOf(input_ba.getText());
                 if(breakPointPosition > 8191 || breakPointPosition < 0)
                 {
-                    getModel().setDisplayContents(new String[] {"No address" + breakPointPosition});
+                    getModel().forceSetDisplayContents(new String[] {"No address" + breakPointPosition});
                     getModel().resetDisplayContents();
                 }else
                 {
@@ -194,7 +197,7 @@ public class ButtonsController extends JPanel
                 }
             }catch(NumberFormatException err)
             {
-                getModel().setDisplayContents(new String [] {"Not a valid input. ba value must be a number"});
+                getModel().forceSetDisplayContents(new String [] {"Not a valid input. ba value must be a number"});
                 getModel().resetDisplayContents();
 
             }
@@ -266,8 +269,10 @@ public class ButtonsController extends JPanel
             {
                 while(getModel().stoppedStatus() == StoppedCategory.notStopped && !hitBreakPoint)
                 {
-                    if(getModel().stoppedStatus() == StoppedCategory.stopped)
-                    System.out.println("! get model!!");
+                    if(getModel().getPauseStatus());
+                    // Paused
+                    //System.out.println("Here!");
+
                     // do nothing
                     else if (getModel().getBreakPoint() == getModel().programCounter())
                     {   
