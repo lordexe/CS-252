@@ -1,9 +1,6 @@
 package viewAndController.buttonViewAndController;
 
 import model.*;
-
-import java.awt.*;
-import java.awt.event.*;
 import javax.swing.*;
 
 public class buttonsPanel extends JPanel{
@@ -46,9 +43,7 @@ public class buttonsPanel extends JPanel{
         ButtonsController buttons = new ButtonsController(machine);
 
         setPanel(new JPanel());
-        getPanel().setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
         getPanel().add(buttons);
-
         add(getPanel());
 
     }

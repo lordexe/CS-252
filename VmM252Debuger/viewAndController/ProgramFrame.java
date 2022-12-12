@@ -1,5 +1,8 @@
 package viewAndController;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+
 import javax.swing.*;
 
 import model.VM252DebuggerModel;
@@ -55,21 +58,24 @@ public class ProgramFrame extends JFrame{
         // Create panel to hold all views and controllers
     
         setPanel(new JPanel());
-        getPanel().setLayout(null);
+        getPanel().setLayout(new BorderLayout());
     
         // Add and setBounds, views and controllers to panel
-        
-        DisplayPanel.setBounds(500,100,300,300);
-        getPanel().add(DisplayPanel);
 
-        ObjStringPanel.setBounds(0, 400, 500, 300);
-        getPanel().add(ObjStringPanel);
+        JPanel Displays = new JPanel();
+        Displays.setLayout(new GridLayout(2,1));
+        Displays.add(runningPanel);
+        Displays.add(ObjStringPanel);
+
+        getPanel().add(Displays, BorderLayout.CENTER);
+
+        // buttonsPanel.setBounds(0, 0, 800, 100);
+        getPanel().add(buttonsPanel, BorderLayout.WEST);
+
+        // DisplayPanel.setBounds(500,100,300,300);
+        getPanel().add(DisplayPanel, BorderLayout.EAST);
     
-        buttonsPanel.setBounds(0, 0, 800, 100);
-        getPanel().add(buttonsPanel);
-    
-        runningPanel.setBounds(0, 100, 500, 300);
-        getPanel().add(runningPanel);
+
     
     
         add(getPanel());

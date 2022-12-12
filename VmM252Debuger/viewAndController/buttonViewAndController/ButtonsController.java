@@ -16,12 +16,12 @@ public class ButtonsController extends JPanel
 
     // toolbar
 
-    private JToolBar tool_bar;
+    private JToolBar tool_bar, menu_bar;
 
     // buttons
 
-    private JButton Help_h, Cmd_n, Cmd_q, Cmd_r, Cmd_ba, Cmd_pf, stop, resume, instructionIncrease, instructionDecrease ;
-    private JLabel toolbarLabel, baLabel;
+    private JButton Help_h, Cmd_n, Cmd_q, Cmd_r, Cmd_pf, stop, resume, instructionIncrease, instructionDecrease ;
+    private JLabel toolbarLabel, baLabel, menubarLabel;
     private JTextField input_ba;
 
     //Accessors
@@ -65,6 +65,13 @@ public class ButtonsController extends JPanel
         // create a new toolbar
 
         tool_bar = new JToolBar();
+        tool_bar.setOrientation(SwingConstants.VERTICAL);
+
+        // create a menu bar
+
+        menu_bar = new JToolBar();
+        menu_bar.setOrientation(SwingConstants.VERTICAL);
+
 
         // Create the buttons
 
@@ -72,11 +79,13 @@ public class ButtonsController extends JPanel
         stop = new JButton(" Hold ");
         Cmd_n = new JButton(" Next ");
         resume = new JButton(" Resume ");
-        Cmd_ba = new JButton(" Break Now ");
         baLabel = new JLabel(" Break Set: ");
         input_ba = new JTextField("", 10);
         instructionIncrease = new JButton(" + Speed ");
         instructionDecrease = new JButton (" - Speed ");
+
+        // Menu Bar Buttons
+
         Help_h = new JButton(" Help ");
         Cmd_pf = new JButton(" New File ");
         Cmd_q = new JButton(" Quit ");
@@ -175,35 +184,32 @@ public class ButtonsController extends JPanel
         tool_bar.add(stop);
         tool_bar.add(Cmd_n);
         tool_bar.add(resume);
-        tool_bar.add(Cmd_ba);
         tool_bar.add(baLabel);
         tool_bar.add(input_ba);
         tool_bar.add(instructionIncrease);
         tool_bar.add(instructionDecrease);
-        tool_bar.add(Help_h);
-        tool_bar.add(Cmd_pf);
-        tool_bar.add(Cmd_q);
 
-
-
-
-
-
-
-
+        menu_bar.setFloatable(false);
+        menu_bar.add(Help_h);
+        menu_bar.add(Cmd_pf);
+        menu_bar.add(Cmd_q);
 
 
         setPanel(new JPanel());
-        getPanel().add(tool_bar);
+        getPanel().setLayout(new BorderLayout());
+        getPanel().add(tool_bar, BorderLayout.NORTH);
+        getPanel().add(menu_bar, BorderLayout.SOUTH);
+
+
 
         tool_bar.setBackground(new Color(200,200,200));
-
+        menu_bar.setBackground(new Color(100,200,200));
 
         //
         // Add the panel to the container
         //
 
-        add(getPanel(), BorderLayout.NORTH);
+        add(getPanel());
     }
 
     private class setBreakPointListener implements ActionListener

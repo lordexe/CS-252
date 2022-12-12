@@ -73,7 +73,7 @@ public class ObjFileStringPanel extends JPanel implements Observer {
         setPanel(new JPanel());
 
         setDisplayBox(new JTextArea("Obj File Instructions:" + "\n" + "\n" + getContent()));
-        getDisplayBox().setBounds(150,25, OUR_DEFAULT_WIDTH,OUR_DEFAULT_HEIGHT);
+        //getDisplayBox().setBounds(150,25, OUR_DEFAULT_WIDTH,OUR_DEFAULT_HEIGHT);
         getDisplayBox().setBackground(new Color(255,255,255));
         getDisplayBox().setForeground(Color.BLACK);
         getDisplayBox().setLineWrap(true);
@@ -82,10 +82,10 @@ public class ObjFileStringPanel extends JPanel implements Observer {
         JScrollPane scroll = new JScrollPane(getDisplayBox());
         scroll.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scroll.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_AS_NEEDED);
-        scroll.setBounds(150, 2, OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
+        scroll.setBounds(50, 2, 200, 200);
 
-        setLayout(null);
-        add(scroll);
+        setLayout(new BorderLayout());
+        add(scroll, BorderLayout.CENTER);
 
 
     }
