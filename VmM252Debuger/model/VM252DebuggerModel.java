@@ -26,7 +26,6 @@ public class VM252DebuggerModel extends SimpleObservable
     private String [] displayContents 
         = new String [ VM252ArchitectureSpecifications.MEMORY_SIZE_IN_BYTES ];
     private short breakPoint;
-    private boolean HaltingInstruction;
     public int myInput;
     private boolean inputReady = false;
     private int myExecutingSpeed;
@@ -121,6 +120,10 @@ public class VM252DebuggerModel extends SimpleObservable
     public void setStoppedStatus(StoppedCategory other){
         myStoppedStatus = other;
         }
+
+    public StoppedCategory getStoppedStatus(){
+        return myStoppedStatus;
+        }
     
     public void setInstruction(String other) {
         instruction = other;
@@ -147,15 +150,6 @@ public class VM252DebuggerModel extends SimpleObservable
         breakPoint = other;
     }
 
-    public boolean getHaltStatus()
-    {
-        return HaltingInstruction;
-    }
-
-    public void setHalt(boolean other)
-    {
-       HaltingInstruction = other;
-    }
 
     private void setSuppressPcStatus(boolean other)
     {
@@ -357,7 +351,6 @@ public class VM252DebuggerModel extends SimpleObservable
         String [] welcomeContents = {""};
 
         setSuppressPcStatus(false);
-        setHalt(false);
         setAccumulator(0);
         setProgramCounter(0);
         setDisplayContents(welcomeContents);
