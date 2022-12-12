@@ -38,7 +38,7 @@ public class importObjfileChooser extends JFileChooser{
             String file = fileChooser.getSelectedFile().getPath();
             byte [] program = VM252Utilities.readObjectCodeFromObjectFile(file);
             ProgramFrame frame = new ProgramFrame(program);
-            frame.setSize(900,500);
+            frame.setSize(900,550);
 
             frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
             frame.setVisible(true);

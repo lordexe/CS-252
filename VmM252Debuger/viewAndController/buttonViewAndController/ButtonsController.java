@@ -66,11 +66,13 @@ public class ButtonsController extends JPanel
 
         tool_bar = new JToolBar();
         tool_bar.setOrientation(SwingConstants.VERTICAL);
+        toolbarLabel = new JLabel("Command Palette");
 
         // create a menu bar
 
         menu_bar = new JToolBar();
         menu_bar.setOrientation(SwingConstants.VERTICAL);
+        menubarLabel = new JLabel("Menu Options");
 
 
         // Create the buttons
@@ -180,6 +182,8 @@ public class ButtonsController extends JPanel
         // Add the buttons to the toolbar
 
         tool_bar.setFloatable(false);
+        tool_bar.setLayout(new GridLayout(9,1));
+        tool_bar.add(toolbarLabel);
         tool_bar.add(Cmd_r);
         tool_bar.add(stop);
         tool_bar.add(Cmd_n);
@@ -190,15 +194,17 @@ public class ButtonsController extends JPanel
         tool_bar.add(instructionDecrease);
 
         menu_bar.setFloatable(false);
+        menu_bar.setLayout(new GridLayout(4,1));
+        menu_bar.add(menubarLabel);
         menu_bar.add(Help_h);
         menu_bar.add(Cmd_pf);
         menu_bar.add(Cmd_q);
 
 
         setPanel(new JPanel());
-        getPanel().setLayout(new BorderLayout());
-        getPanel().add(tool_bar, BorderLayout.NORTH);
-        getPanel().add(menu_bar, BorderLayout.SOUTH);
+        getPanel().setLayout(new GridLayout(2,1, 0, 10));
+        getPanel().add(tool_bar);
+        getPanel().add(menu_bar);
 
 
 
