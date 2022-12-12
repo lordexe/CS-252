@@ -193,7 +193,7 @@ public class ButtonsController extends JPanel
                 }else
                 {
                     getModel().setBreakPoint(breakPointPosition);
-                    getModel().setDisplayContents(new String[] {"set breakpoint at address " + breakPointPosition});
+                    getModel().forceSetDisplayContents(new String[] {"set breakpoint at address " + breakPointPosition});
                 }
             }catch(NumberFormatException err)
             {
@@ -278,7 +278,7 @@ public class ButtonsController extends JPanel
                     {   
                         System.out.println("get model!!");
                         getModel().runProgram();
-                        getModel().setDisplayContents(new String [] {"Hit breakpoint at address " + getModel().getBreakPoint() });
+                        getModel().forceSetDisplayContents(new String [] {"Hit breakpoint at address " + getModel().getBreakPoint() });
                         hitBreakPoint = true;
                     }else
                         getModel().runProgram();
