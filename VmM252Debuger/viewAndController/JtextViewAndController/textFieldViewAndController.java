@@ -165,7 +165,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 	        public void actionPerformed(ActionEvent inputChange){
                 getTextBox().resetDisplayContents();
                 try{
-                    getTextBox().setInputValue(Short.valueOf(getInputTextField().getText()));
+                    getTextBox().setInputValue(Integer.parseInt(getInputTextField().getText()));
                     getTextBox().setInputReady(true);
                 }catch(NumberFormatException err){
                     getTextBox().forceSetDisplayContents(new String [] {"Not a valid input. Input for value must be a number"});
@@ -205,8 +205,6 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
         getACCTextField().setText("" + getTextBox().accumulator());
         getPCTextField().setText("" + getTextBox().programCounter());
         getInstructionTextFieldValue().setText("" + getTextBox().getNextInst());
-        System.out.println(getTextBox().getNextInst());
-        System.out.println(getTextBox().programCounter());
         getInputTextField().setText("" + getTextBox().getInputValue());
     }
 
