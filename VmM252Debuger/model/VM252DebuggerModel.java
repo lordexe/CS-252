@@ -447,7 +447,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 case VM252ArchitectureSpecifications.LOAD_OPCODE :
                     resetDisplayContents();
-                    setAccumulator(currentInstruction.numericOperand());
+                    setAccumulator(fetchMemoryData(currentInstruction.numericOperand()));
                     setDisplayContents(new String [] {"Addr " + programCounter() +
                          ": " + "LOAD " + currentInstruction.numericOperand()});
                     setNextInst(currentInstruction.symbolicOpcode());
@@ -473,7 +473,6 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 case VM252ArchitectureSpecifications.ADD_OPCODE :
                     data = fetchMemoryData(currentInstruction.numericOperand());
-                    System.out.println("data: " + data);
                     setAccumulator(
                         accumulator() + data
                         );
@@ -506,6 +505,7 @@ public class VM252DebuggerModel extends SimpleObservable
                     resetDisplayContents();
                     setDisplayContents(new String [] {"Addr " + programCounter() +
                      ": " + "JUMPZ " + currentInstruction.numericOperand()});
+                    System.out.println("Zero Op");
                     if (accumulator() == 0) {
                         setProgramCounter(currentInstruction.numericOperand());
                         resetDisplayContents();
@@ -516,12 +516,13 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 case VM252ArchitectureSpecifications.JUMP_ON_POSITIVE_OPCODE :
                     resetDisplayContents();
+                    System.out.println("Positive Op");
                     setDisplayContents(new String [] {"Addr " + programCounter() +
                      ": " + "JUMPP " + currentInstruction.numericOperand()});
                     if (accumulator() > 0) {
-                        setProgramCounter(
-                            currentInstruction.numericOperand()
-                            );
+                        System.out.println("Before" + programCounter());
+                        setProgramCounter(currentInstruction.numericOperand());
+                        System.out.println("After" + programCounter());
                         setSuppressPcStatus(true);
                         }
                     setNextInst(currentInstruction.symbolicOpcode());
@@ -560,7 +561,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 }
 
-            if (stoppedStatus() == StoppedCategory.notStopped && !getSuppressPcStatus())
+            if (stoppedStatus() == StoppedCategory.notStopped && !getSuppressPcStatus()){
                 resetDisplayContents();
                 setProgramCounter(
                     VM252ArchitectureSpecifications.nextMemoryAddress(
@@ -568,6 +569,7 @@ public class VM252DebuggerModel extends SimpleObservable
                         currentInstruction.instructionBytes().length
                         )
                     );
+            }
 
             if (stoppedStatus() == StoppedCategory.notStopped)
             setNextInst(currentInstruction.symbolicOpcode());
