@@ -1,22 +1,56 @@
 VM252 Debugger commands:
--	    aa IV = Alter contents of accumulator to IV  //change a(n) object/variable representing accumulator to IV
--	    ap MA = Alter contents of program counter to MA //change a(n) object/variable representing program counter to MA
+- ##	    aa IV = Alter contents of accumulator to IV  //change a(n) object/variable representing accumulator to IV
+-##	    ap MA = Alter contents of program counter to MA //change a(n) object/variable representing program counter to MA
 -	    amb MA HB = Alter contents of the byte at MA to unsigned hex value HB
+-##	    ba MA = Set a breakpoint at address MA
+-##	    h = Print this help message //display this minus the comments I have made
+-	    mb = Display all of machine memory as bytes in hex //return something
+-##	    n = Execute next machine instruction //go to the next command
+-	    ob = Display the portion of machine memory holding object code as bytes in hex
+-##	    q = Quit //close the window
+-##	    r = Run machine until error occurs or stop instruction is executed
+-##	    s = Display machine state (accumulator, program counter, etc.) //return accumulator, program count and next command
+-##	    z = Reinitialize program counter to zero //set a(n) object/variable representing program counter to 0
+
 -	    amd MA SD = Alter contents of the two-byte pair at MA to signed integer value SD
 -	    amdx MA HD = Alter contents of the two-byte pair at MA to unsigned hex value HD
--	    ba MA = Set a breakpoint at address MA
 -	    bl L = Set a breakpoint at source-line L
 -	    cb = Clear all breakpoints
--	    h = Print this help message //display this minus the comments I have made
--	    mb = Display all of machine memory as bytes in hex //return something
 -	    md = Display all of machine memory as 2-byte data in hex
 -	    mi = Display all of machine memory as instructions, data, and labels
--	    n = Execute next machine instruction //go to the next command
--	    ob = Display the portion of machine memory holding object code as bytes in hex
 -	    od = Display the portion of machine memory holding object code as 2-byte data in hex
 -	    oi = Display the portion of machine memory holding object code as instructions, data, and labels
--	    q = Quit //close the window
--	    r = Run machine until error occurs or stop instruction is executed
--	    s = Display machine state (accumulator, program counter, etc.) //return accumulator, program count and next command
 -	    t = Toggle instruction tracing
--	    z = Reinitialize program counter to zero //set a(n) object/variable representing program counter to 0
+
+
+1 interface 
+1 slide diagram -
+--- Button  --  // 2 - 3 slides
+n  to ba 
+hold to help q r s z  
+ --- Status (aa ap   1 slide 
+--- displayed  - 2 slides 
+
+-- print next to - - 
+
+
+
+
+        public static final int ADDRESS_SIZE_IN_BITS = 13;
+        public static final int CONSTANT_OPERAND_SIZE_IN_BITS = 12;
+        public static final int MEMORY_SIZE_IN_BYTES = 8192;
+
+        public static final int LOAD_OPCODE = 0;
+        public static final int STORE_OPCODE = 1;
+        public static final int ADD_OPCODE = 2;
+        public static final int SUBTRACT_OPCODE = 3;
+        public static final int JUMP_OPCODE = 4;
+        public static final int JUMP_ON_ZERO_OPCODE = 5;
+        public static final int JUMP_ON_POSITIVE_OPCODE = 6;
+        public static final int SET_OPCODE = 14;
+        public static final int INPUT_OPCODE = 60;
+        public static final int OUTPUT_OPCODE = 61;
+        public static final int NO_OP_OPCODE = 62;
+        public static final int STOP_OPCODE = 63;
+
+
