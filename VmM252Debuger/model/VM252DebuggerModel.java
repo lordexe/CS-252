@@ -31,6 +31,34 @@ public class VM252DebuggerModel extends SimpleObservable
     private int myExecutingSpeed;
     private String nextInst;
     private String objFileString = "";
+    // public static class tableRowInfo {
+    //     public int counter;
+    //     public String strOpcode;
+    //     public int intOprand;
+    //     public String hexStringOpcode;
+    //     public String hexStringOprand;
+    //     public byte [] memoryByteByAddress;
+
+    //     public tableRowInfo(
+    //         int counter;
+    //         String strOpcode;
+    //         int intOprand;
+    //         String hexStringOpcode;
+    //         String hexStringOprand;
+    //         byte [] memoryByteByAddress;
+    //     ){
+    //         counter = otherCounter;
+    //         strOpcode = otherStrOpcode;
+    //         intOprand = otherIntOprand;
+    //         hexStringOpcode = otherHexStringOpcode;
+    //         hexStringOprand = otherHexStringOprand;
+    //         memoryByteByAddress = otherMemoryByteAddress;
+    //     }
+    // };
+
+    // private tableRowInfo [] rowsInfo = new tableRowInfo [vm252architecturespecifications.MEMORY_SIZE_IN_BYTES];
+
+    // public tableRowInfo getTa
 
     
 
@@ -220,56 +248,56 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 case VM252ArchitectureSpecifications.LOAD_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "LOAD" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.SET_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "SET" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.STORE_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "STORE" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.ADD_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "Add" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.SUBTRACT_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "Subtract" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "Jump" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_ON_ZERO_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "Jumpz" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_ON_POSITIVE_OPCODE :
                     all_string = all_string + "[Count " + currentPC + "] " + "Jumpp" + currInstruction.numericOperand() + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) +
-                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff)  +
+                    "\n" + "Oprand hex" + Integer.toHexString( (int) currInstruction.numericOperand() & 0xff) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.INPUT_OPCODE: {
                     resetDisplayContents();
                     all_string = all_string + "[Count " + currentPC + "] " + " Input" + 
-                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode()) + "\n";
+                    "\n" + "Opcode hex" + Integer.toHexString( (int) currInstruction.numericOpcode() & 0xff) + "\n";
                     break;
             }
 

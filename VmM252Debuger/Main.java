@@ -6,7 +6,9 @@ public class Main{
     {
         EventQueue.invokeLater(
             () ->{
-                    // Import Obj file
+                    //
+                    // create a new importObjfileChooser to Import Obj file (.vm252obj)
+                    //
                     importObjfileChooser File = new importObjfileChooser();
                     File.importObjfileChooser();
 

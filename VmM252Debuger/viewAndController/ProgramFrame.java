@@ -38,19 +38,25 @@ public class ProgramFrame extends JFrame{
         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
         
         // Create Model Object 
+        // input: objPrgram as byte [] from .vm252obj
     
         VM252DebuggerModel machine = new VM252DebuggerModel(objProgram);
 
         // create text FieldView pannel
+        // give access to the Model
+        // attach DisplayPanel to link Model to textFieldViewAndController 
+        // preference from the Vm252Simulation stepper.java
 
         textFieldViewAndController DisplayPanel = new textFieldViewAndController(machine);
         machine.attach(DisplayPanel);
     
         // Create button pannel
+        // get current instance and make call instance to Model
     
         buttonsPanel buttonsPanel = new buttonsPanel(machine);
+
         // Create running debuger process pannel
-    
+        // get update from the accounce change ( announceChange() ) belong to observation -- observer
         DisplayRunPanel runningPanel = new DisplayRunPanel(machine);
 
         ObjFileStringPanel ObjStringPanel = new ObjFileStringPanel(machine);
@@ -67,16 +73,10 @@ public class ProgramFrame extends JFrame{
         Displays.add(runningPanel);
         Displays.add(ObjStringPanel);
 
+        // style single feature to the pannel
         getPanel().add(Displays, BorderLayout.CENTER);
-
-        // buttonsPanel.setBounds(0, 0, 800, 100);
         getPanel().add(buttonsPanel, BorderLayout.WEST);
-
-        // DisplayPanel.setBounds(500,100,300,300);
         getPanel().add(DisplayPanel, BorderLayout.EAST);
-    
-
-    
     
         add(getPanel());
     

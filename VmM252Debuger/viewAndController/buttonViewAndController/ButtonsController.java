@@ -59,24 +59,21 @@ public class ButtonsController extends JPanel
 
     public ButtonsController(VM252DebuggerModel initialModel)
     {
-        
+        // set input Model to myModel
         setModel(initialModel);
 
-        // create a new toolbar
-
+        // create a new toolbars
         tool_bar = new JToolBar();
         tool_bar.setOrientation(SwingConstants.VERTICAL);
         toolbarLabel = new JLabel("Command Palette");
 
         // create a menu bar
-
         menu_bar = new JToolBar();
         menu_bar.setOrientation(SwingConstants.VERTICAL);
         menubarLabel = new JLabel("Menu Options");
 
 
         // Create the buttons
-
         Cmd_r = new JButton(" Run ");
         stop = new JButton(" Hold ");
         Cmd_n = new JButton(" Next ");
@@ -87,7 +84,6 @@ public class ButtonsController extends JPanel
         instructionDecrease = new JButton (" - Speed ");
 
         // Menu Bar Buttons
-
         Help_h = new JButton(" Help ");
         Cmd_pf = new JButton(" New File ");
         Cmd_q = new JButton(" Quit ");
@@ -193,6 +189,7 @@ public class ButtonsController extends JPanel
         tool_bar.add(instructionIncrease);
         tool_bar.add(instructionDecrease);
 
+        // Add the buttons to the Menu bar
         menu_bar.setFloatable(false);
         menu_bar.setLayout(new GridLayout(4,1));
         menu_bar.add(menubarLabel);
@@ -200,14 +197,14 @@ public class ButtonsController extends JPanel
         menu_bar.add(Cmd_pf);
         menu_bar.add(Cmd_q);
 
-
+        // set JPanel and add Toolbar and Menu to panel
         setPanel(new JPanel());
         getPanel().setLayout(new GridLayout(2,1, 0, 10));
         getPanel().add(tool_bar);
         getPanel().add(menu_bar);
 
 
-
+        // set color for JPanel background
         tool_bar.setBackground(new Color(200,200,200));
         menu_bar.setBackground(new Color(100,200,200));
 
@@ -217,6 +214,14 @@ public class ButtonsController extends JPanel
 
         add(getPanel());
     }
+
+    // ActionListener setBreakPointListener
+    // purpose: 
+    // get Break point when user hit enter as Int
+    // set break point to the model 
+    // Error handler: 
+    //input out of range , 0 < break point < 8191
+    // Invalid input
 
     private class setBreakPointListener implements ActionListener
     {
@@ -244,6 +249,11 @@ public class ButtonsController extends JPanel
         }
     }
 
+    // ActionListener RunStepListener
+    // Condition: When the programe is hold 
+    // purpose: 
+    // execure next instruction from last instruction
+
     private class RunStepListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
@@ -253,6 +263,10 @@ public class ButtonsController extends JPanel
         }
     }
 
+    // ActionListener RunButtonActionListener
+    // 
+    // purpose: 
+    // reapeatly call runPrgram from model to untill prgrame hit StoppedCategory.stopped
     private class RunButtonActionListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
@@ -262,6 +276,13 @@ public class ButtonsController extends JPanel
         }
     }
 
+
+    // ActionListener ChangeSpeedListener
+    // 
+    // purpose: 
+    // Speed up or Slow down run time of Instruciton execute
+    // Instruction execute speed faster when currSpeed - 500
+    // Instruction execute Speed SLowdown when currSpeed + 500
     private class ChangeSpeedListener implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
@@ -279,6 +300,10 @@ public class ButtonsController extends JPanel
         }
     }
 
+    // ActionListener ChangeRunningStatus
+    // Button "Hold"
+    // purpose: 
+    // set PauseSatus to temp stop the Intstruction execution
     private class ChangeRunningStatus implements ActionListener
     {
         public void actionPerformed(ActionEvent event)
@@ -292,7 +317,11 @@ public class ButtonsController extends JPanel
         }
     }
 
-    
+    // ActionListener ExecutionThread
+    // 
+    // purpose: repeatly excute runProgram in Model
+    // Condition: not hit StoppedCategory.stopped
+    // 
     private class ExecutionThread extends Thread{
         @Override
         public void run()
@@ -330,6 +359,11 @@ public class ButtonsController extends JPanel
         }
     }
 
+    // ActionListener StepExecutionThread
+    // 
+    // purpose: Stop execute Instruction 
+    // condition: when stopped hit StoppedCategory.stopped
+    // 
     private class StepExecutionThread extends Thread{
         @Override
         public void run()
