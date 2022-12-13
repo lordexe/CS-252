@@ -72,7 +72,7 @@ public class ObjFileStringPanel extends JPanel implements Observer {
 
         setPanel(new JPanel());
 
-        setDisplayBox(new JTextArea("Obj File Instructions:" + "\n" + "\n" + getContent()));
+        setDisplayBox(new JTextArea("Obj File Instructions:" + "\n" + "\n" + "Prog Count | OPCODE | Opcode Hex | Operand Hex " + "\n" + getContent()));
         //getDisplayBox().setBounds(150,25, OUR_DEFAULT_WIDTH,OUR_DEFAULT_HEIGHT);
         getDisplayBox().setBackground(new Color(255,255,255));
         getDisplayBox().setForeground(Color.BLACK);

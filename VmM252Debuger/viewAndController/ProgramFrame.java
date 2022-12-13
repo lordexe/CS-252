@@ -34,7 +34,7 @@ public class ProgramFrame extends JFrame{
     public ProgramFrame(byte [] objProgram) {
     
         //Set title
-        setTitle("VM252 Debuger GUI");
+        setTitle("VM252 Debugger GUI");
         setSize(OUR_DEFAULT_WIDTH, OUR_DEFAULT_HEIGHT);
         
         // Create Model Object 
