@@ -106,7 +106,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
 
         setTextBox(initialValues);
 
-        JLabel ACCLabel = new JLabel("ACC: ", JLabel.RIGHT);
+        JLabel ACCLabel = new JLabel("Accumulator: ", JLabel.RIGHT);
         setACCTextFieldValue(new JTextField("" + getTextBox().accumulator(), OUR_COMPONENT_FIELD_AND_AREA_WIDTH));
         System.out.println(getTextBox().accumulator());
         ActionListener setAccValue = new ActionListener(){
@@ -124,7 +124,7 @@ public class textFieldViewAndController extends JPanel implements SimpleObserver
         }};
         getACCTextField().addActionListener(setAccValue);
 
-        JLabel PCLabel = new JLabel("PC: ", JLabel.RIGHT);
+        JLabel PCLabel = new JLabel("Prog Counter: ", JLabel.RIGHT);
         setPCTextFieldValue(new JTextField("" + getTextBox().programCounter()));
 
         ActionListener setPcValue = new ActionListener() {

@@ -219,77 +219,91 @@ public class VM252DebuggerModel extends SimpleObservable
             switch (currentInstruction.numericOpcode()) {
 
                 case VM252ArchitectureSpecifications.LOAD_OPCODE :
-                    all_string = all_string + "Counter: " + currentPC + " | " + "LOAD" + currInstruction.numericOperand() + 
+
+                    all_string = all_string + "Counter: " + currentPC + " | " + "LOAD" + currInstruction.numericOperand() +
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.SET_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "SET" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.STORE_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "STORE" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.ADD_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Add" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.SUBTRACT_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Subtract" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Jump" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_ON_ZERO_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Jumpz" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_ON_POSITIVE_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Jumpp" + currInstruction.numericOperand() + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) +
                     " | " + "Oprand hex: " + Integer.toHexString( (int) currInstruction.numericOperand()) + "\n";
                     break;
 
-                case VM252ArchitectureSpecifications.INPUT_OPCODE: {
+                case VM252ArchitectureSpecifications.INPUT_OPCODE:
                     resetDisplayContents();
                     all_string = all_string + "Counter: " + currentPC + " | " + " Input" + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) + "\n";
+
                     break;
-            }
+                
 
                 case VM252ArchitectureSpecifications.OUTPUT_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Output" + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString((int) currInstruction.numericOpcode()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.NO_OP_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Noop" +
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) + "\n";
                     break;
 
                 case VM252ArchitectureSpecifications.STOP_OPCODE :
                     all_string = all_string + "Counter: " + currentPC + " | " + "Stop" + 
+                    " | " + "Memory hex: " + Integer.toHexString( (int) getMemoryValue()[currentPC] & 0xff) +
                     " | " + "Opcode hex: " + Integer.toHexString( (int) currInstruction.numericOpcode()) + "\n";
                     endCodeChecker = true;
                     break;
 
-                }
+            }
 
         if (! getSuppressPcStatus())
             currentPC = 
@@ -460,6 +474,7 @@ public class VM252DebuggerModel extends SimpleObservable
         // Simulate the execution of currentInstruction
         //
 
+
             setSuppressPcStatus(false);
 
             switch (currentInstruction.numericOpcode()) {
@@ -467,14 +482,14 @@ public class VM252DebuggerModel extends SimpleObservable
                 case VM252ArchitectureSpecifications.LOAD_OPCODE :
                     resetDisplayContents();
                     setAccumulator(fetchMemoryData(currentInstruction.numericOperand()));
-                    setDisplayContents(new String [] {"Count " + programCounter() +
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() +
                          "| " + "LOAD " + currentInstruction.numericOperand()});
                     setNextInst(currentInstruction.symbolicOpcode());
                     break;
 
                 case VM252ArchitectureSpecifications.SET_OPCODE :
                     resetDisplayContents();
-                    setDisplayContents(new String [] {"Count " + programCounter() +
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() +
                          "| " + "SET " + currentInstruction.numericOperand()});
                     setAccumulator(currentInstruction.numericOperand());
                     setNextInst(currentInstruction.symbolicOpcode());
@@ -485,7 +500,7 @@ public class VM252DebuggerModel extends SimpleObservable
                         currentInstruction.numericOperand(),
                         accumulator()
                         );
-                        setDisplayContents(new String [] {"Count " + programCounter() +
+                        setDisplayContents(new String [] {"Counter:  " + programCounter() +
                          "| " + "STORE " + currentInstruction.numericOperand()});
                          setNextInst(currentInstruction.symbolicOpcode());
                     break;
@@ -495,7 +510,7 @@ public class VM252DebuggerModel extends SimpleObservable
                     setAccumulator(
                         accumulator() + data
                         );
-                        setDisplayContents(new String [] {"Count " + programCounter() + 
+                        setDisplayContents(new String [] {"Counter:  " + programCounter() + 
                         "| " + "ADD " + currentInstruction.numericOperand()});
                         setNextInst(currentInstruction.symbolicOpcode());
 
@@ -506,14 +521,14 @@ public class VM252DebuggerModel extends SimpleObservable
                     setAccumulator(
                         accumulator() - data
                         );
-                    setDisplayContents(new String [] {"Count " + programCounter() +
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() +
                      "| " + "SUBTRACT " + currentInstruction.numericOperand()});
                     setNextInst(currentInstruction.symbolicOpcode());
                     break;
 
                 case VM252ArchitectureSpecifications.JUMP_OPCODE :
                     setProgramCounter(currentInstruction.numericOperand());
-                    setDisplayContents(new String [] {"Count " + programCounter() + 
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() + 
                     "| " + "JUMP " + currentInstruction.numericOperand()});
                     resetDisplayContents();
                     setSuppressPcStatus(true);
@@ -522,7 +537,7 @@ public class VM252DebuggerModel extends SimpleObservable
 
                 case VM252ArchitectureSpecifications.JUMP_ON_ZERO_OPCODE :
                     resetDisplayContents();
-                    setDisplayContents(new String [] {"Count " + programCounter() +
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() +
                      "| " + "JUMPZ " + currentInstruction.numericOperand()});
                     //System.out.println("Zero Op");
                     if (accumulator() == 0) {
@@ -536,7 +551,7 @@ public class VM252DebuggerModel extends SimpleObservable
                 case VM252ArchitectureSpecifications.JUMP_ON_POSITIVE_OPCODE :
                     
                     //System.out.println("Positive Op");
-                    setDisplayContents(new String [] {"Count " + programCounter() +
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() +
                      "| " + "JUMPP " + currentInstruction.numericOperand()});
                     if (accumulator() > 0) {
                         //System.out.println("Before" + programCounter());
@@ -551,19 +566,19 @@ public class VM252DebuggerModel extends SimpleObservable
                 case VM252ArchitectureSpecifications.INPUT_OPCODE: {
                     resetDisplayContents();
 
-                    forceSetDisplayContents(new String [] {"Count " + programCounter() + "| " + "Please provide some Input"});
+                    forceSetDisplayContents(new String [] {"Counter:  " + programCounter() + "| " + "Please provide some Input"});
                     while (!getInputReady())
                         resetDisplayContents();
 
                     setAccumulator(getInputValue());
-                    setDisplayContents(new String[] {"Count " + programCounter() + "| " + "Set Input value to " + getInputValue()});
+                    setDisplayContents(new String[] {"Counter:  " + programCounter() + "| " + "Set Input value to " + getInputValue()});
                     setInputReady(false);
                     setNextInst(currentInstruction.symbolicOpcode());
                     break;
                }
 
                 case VM252ArchitectureSpecifications.OUTPUT_OPCODE :
-                    setDisplayContents(new String [] {"Count " + programCounter() +
+                    setDisplayContents(new String [] {"Counter:  " + programCounter() +
                      "| " + "The Output is " + accumulator()});
                      setNextInst(currentInstruction.symbolicOpcode());
                     break;
@@ -575,7 +590,7 @@ public class VM252DebuggerModel extends SimpleObservable
                     setStoppedStatus(
                     VM252DebuggerModel.StoppedCategory.stopped
                     );
-                    forceSetDisplayContents(new String [] {"Count " + programCounter() + "| " + "Program Stops"});
+                    forceSetDisplayContents(new String [] {"Counter:  " + programCounter() + "| " + "Program Stops"});
                     resetDisplayContents();
                     break;
 
